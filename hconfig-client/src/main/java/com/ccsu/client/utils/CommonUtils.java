@@ -8,8 +8,8 @@ package com.ccsu.client.utils;
  */
 public class CommonUtils {
 
-    public static String getRealKey(String beanName, String value) {
-        return beanName + "-" + value;
+    public static String getRealKey(String prefix, String value) {
+        return prefix + "-" + value;
     }
 
 }

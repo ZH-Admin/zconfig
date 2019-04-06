@@ -1,4 +1,4 @@
-package com.ccsu.server.enums;
+package com.ccsu.common.enums;
 
 import lombok.Getter;
 
@@ -21,6 +21,9 @@ public enum ResultEnum {
     LOGIN_VO_NULL("login vo is null", -10004),
     LOGIN_PASS_ERROR("pass error", -10005),
     LOGIN_MOBILE_NOT_EXIST("mobile not exist", -10006),
+
+    // config
+    CONFIG_KEY_IS_EXIST("config key is exist", -10008),
 
     // limit
     ACCESS_LIMIT("not enough permission", -10007);

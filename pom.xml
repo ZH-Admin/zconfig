@@ -39,6 +39,13 @@
 			<version>1.2.41</version>
 		</dependency>
 
+		<!--apache工具类-->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.7</version>
+		</dependency>
+
 		<!--google guava 工具库-->
 		<dependency>
 			<groupId>com.google.guava</groupId>
@@ -64,6 +71,7 @@
 	</build>
 
 	<modules>
+		<module>hconfig-common</module>
 		<module>hconfig-client</module>
 		<module>hconfig-server</module>
 		<module>hconfig-admin</module>

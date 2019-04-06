@@ -1,7 +1,7 @@
-package com.ccsu.server.utils;
+package com.ccsu.common.utils;
 
-import com.ccsu.server.entity.vo.BaseRes;
-import com.ccsu.server.enums.ResultEnum;
+import com.ccsu.common.entity.BaseRes;
+import com.ccsu.common.enums.ResultEnum;
 
 /**
  * @author ZhangHang

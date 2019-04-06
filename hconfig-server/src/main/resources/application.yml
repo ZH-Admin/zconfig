@@ -1,9 +1,9 @@
 server:
   port: 8090
   servlet:
-    context-path: /server
+    context-path: /
 
-#redis
+# redis
 redis:
   host: 127.0.0.1
   port: 6379

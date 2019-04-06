@@ -1,9 +1,9 @@
 package com.ccsu.server.handler.exception;
 
-import com.ccsu.server.entity.vo.BaseRes;
-import com.ccsu.server.enums.ResultEnum;
+import com.ccsu.common.entity.BaseRes;
+import com.ccsu.common.enums.ResultEnum;
+import com.ccsu.common.utils.BaseResUtil;
 import com.ccsu.server.exceptions.ServerException;
-import com.ccsu.server.utils.BaseResUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

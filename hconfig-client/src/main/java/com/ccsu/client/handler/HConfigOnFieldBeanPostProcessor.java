@@ -1,6 +1,7 @@
 package com.ccsu.client.handler;
 
 import com.ccsu.client.annotation.HConfig;
+import com.ccsu.client.config.AppConfig;
 import com.ccsu.client.service.HotConfigOnFieldManager;
 import com.ccsu.client.utils.CommonUtils;
 import com.ccsu.client.utils.ReflectionUtils;
@@ -22,15 +23,17 @@ import java.util.concurrent.ConcurrentHashMap;
  * *********************
  * function:
  * BeanPostProcessor接口：
- *  Spring的后置处理器，在IoC完成bean实例化、配置以及其他初始化方法前后要添加一些自己逻辑处理
- *
+ * Spring的后置处理器，在IoC完成bean实例化、配置以及其他初始化方法前后要添加一些自己逻辑处理
+ * <p>
  * HConfigOnFieldBeanPostProcessor：
- *  在客户端初始化bean之前，生成配置（从hotConfigManager中获取）
+ * 在客户端初始化bean之前，生成配置（从hotConfigManager中获取）
  */
 @SuppressWarnings("all")
 @Component
 @Slf4j
 public class HConfigOnFieldBeanPostProcessor implements BeanPostProcessor {
+
+    private AppConfig appConfig;
 
     private HotConfigOnFieldManager hotConfigManager;
 
@@ -56,10 +59,10 @@ public class HConfigOnFieldBeanPostProcessor implements BeanPostProcessor {
                 // 线程安全
                 Map<String, String> data = (ConcurrentHashMap<String, String>) obj;
                 Map<String, String> dataFromRemote = hotConfigManager
-                        .getConfigFromRemote(CommonUtils.getRealKey(beanName, hConfig.value()));
+                        .getConfigFromRemote(CommonUtils.getRealKey(appConfig.getName(), hConfig.value()));
                 // 完成远程配置的读取
                 data.putAll(dataFromRemote);
-                hotConfigManager.setConfig(CommonUtils.getRealKey(beanName, hConfig.value()), data);
+                hotConfigManager.setConfig(CommonUtils.getRealKey(appConfig.getName(), hConfig.value()), data);
             }
         }
 

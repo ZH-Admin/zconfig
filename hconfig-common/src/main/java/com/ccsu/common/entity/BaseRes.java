@@ -1,4 +1,4 @@
-package com.ccsu.server.entity.vo;
+package com.ccsu.common.entity;
 
 import lombok.Data;
 

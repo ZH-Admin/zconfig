@@ -1,6 +1,7 @@
 package com.ccsu.server.exceptions;
 
-import com.ccsu.server.enums.ResultEnum;
+import com.ccsu.common.enums.ResultEnum;
+import com.ccsu.common.exception.BaseException;
 import lombok.Getter;
 
 /**
@@ -10,13 +11,11 @@ import lombok.Getter;
  * function:
  */
 @Getter
-public class ServerException extends RuntimeException {
+public class ServerException extends BaseException {
 
-    private Integer code;
 
     public ServerException(ResultEnum resultEnum) {
-        super(resultEnum.getMessage());
-        this.code = resultEnum.getCode();
+        super(resultEnum);
     }
 
     public ServerException(String message) {
@@ -24,6 +23,6 @@ public class ServerException extends RuntimeException {
     }
 
     public ServerException(Integer code) {
-        this.code = code;
+        super(code);
     }
 }
