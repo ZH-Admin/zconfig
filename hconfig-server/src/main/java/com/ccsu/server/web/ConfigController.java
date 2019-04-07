@@ -26,6 +26,7 @@ public class ConfigController {
     @Autowired
     private ConfigManageService configManageService;
 
+    // 新增
     @PostMapping("/config")
     public BaseRes registerConfig(@RequestParam String appName, @RequestParam String key,
                                   @RequestBody ConcurrentHashMap config) {
@@ -34,8 +35,15 @@ public class ConfigController {
         return BaseResUtil.success();
     }
 
+    // 修改
+    @PostMapping("/modify")
+    public BaseRes modifyConfig() {
+        return BaseResUtil.success();
+    }
+
     @GetMapping("/config")
     public BaseRes getConfig(@RequestParam String appName, @RequestParam String key) {
+        log.info("appName:{}, key:{}", appName, key);
         Map<String, String> config = configManageService.getConfig(appName, key);
         return BaseResUtil.success(config);
     }

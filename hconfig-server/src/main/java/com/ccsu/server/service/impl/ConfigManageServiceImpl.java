@@ -25,6 +25,8 @@ public class ConfigManageServiceImpl implements ConfigManageService {
     // key为app-code + hConfig-value
     private Map<String, ConcurrentHashMap<String, String>> config = Maps.newConcurrentMap();
 
+
+
     @Override
     public Map<String, Map<String, String>> initConfig(String key) {
         // TODO: 2019/4/6 从数据库中加载config

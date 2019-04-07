@@ -38,8 +38,9 @@ public class HConfigOnFieldBeanPostProcessor implements BeanPostProcessor {
     private HotConfigOnFieldManager hotConfigManager;
 
     @Autowired
-    public HConfigOnFieldBeanPostProcessor(HotConfigOnFieldManager hotConfigManager) {
+    public HConfigOnFieldBeanPostProcessor(HotConfigOnFieldManager hotConfigManager, AppConfig appConfig) {
         this.hotConfigManager = hotConfigManager;
+        this.appConfig = appConfig;
     }
 
     @Nullable
@@ -59,10 +60,10 @@ public class HConfigOnFieldBeanPostProcessor implements BeanPostProcessor {
                 // 线程安全
                 Map<String, String> data = (ConcurrentHashMap<String, String>) obj;
                 Map<String, String> dataFromRemote = hotConfigManager
-                        .getConfigFromRemote(CommonUtils.getRealKey(appConfig.getName(), hConfig.value()));
+                        .getConfigFromRemote(hConfig.value());
                 // 完成远程配置的读取
                 data.putAll(dataFromRemote);
-                hotConfigManager.setConfig(CommonUtils.getRealKey(appConfig.getName(), hConfig.value()), data);
+                hotConfigManager.setConfig(hConfig.value(), data);
             }
         }
 

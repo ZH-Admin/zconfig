@@ -26,6 +26,7 @@ public class HelloService {
     }
 
     public void printMap() {
+        log.info("printMap");
         map.forEach((k, v) -> log.info("{}:{}", k, v));
     }
 
