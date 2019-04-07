@@ -15,10 +15,10 @@ import java.util.concurrent.ConcurrentHashMap;
 public interface ConfigManageService {
 
     // 生成配置
-    Map<String, Map<String, String>> initConfig(String key);
+    void initConfig(String key);
 
     // 注册配置
-    void registerConfig(String appName, String key, ConcurrentHashMap<String, String> config);
+    void registerConfig(String appName, String key, Map<String, String> config);
 
     // 获取单个配置
     Map<String, String> getConfig(String appName, String key);
@@ -26,22 +26,22 @@ public interface ConfigManageService {
     // 获取配置
     Map<String, Map<String, String>> getConfigs(String appName, List<String> keys);
 
-    // 更新所有配置
-    void updateAllConfig(String key, Map<String, String> properties);
+    // 更新对应key的全部
+    void updateAllConfig(String appName, String key, Map<String, String> properties);
 
-    // 更新部分配置
-    void updateSectionConfig(String key, Map<String, String> needUpdateConfig);
+    // put section keys
+    void putSectionConfig(String appName, String key, Map<String, String> putConfig);
 
-    // 更新单个配置
-    void updateConfig(String key, String hConfigKey, String hConfigValue);
+    // put key
+    void putConfig(String appName, String key, String hConfigKey, String hConfigValue);
 
-    // 删除单个key
-    void removeConfig(String key, String hConfigKey);
+    // 删除对应key的单个hConfigKey
+    void removeConfig(String appName, String key, String hConfigKey);
 
-    // 删除部分key
-    void removeSectionConfig(String key, List<String> hConfigKeys);
+    // 删除对应key的部分hConfigKey
+    void removeSectionConfig(String appName, String key, List<String> hConfigKeys);
 
-    // 删除所有配置
-    void removeAllConfig(String key);
+    // 删除对应key的全部配置
+    void removeAllConfig(String appName, String key);
 
 }

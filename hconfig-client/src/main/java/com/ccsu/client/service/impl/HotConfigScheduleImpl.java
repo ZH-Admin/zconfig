@@ -36,7 +36,7 @@ public class HotConfigScheduleImpl implements HotConfigSchedule {
     @Override
     public void pullData() {
         scheduledExecutor.scheduleAtFixedRate(() -> hotConfigOnFieldManager.updateAll(),
-                0, 1, TimeUnit.MINUTES);
+                0, 30, TimeUnit.SECONDS);
     }
 
     @Override

@@ -24,6 +24,7 @@ public enum ResultEnum {
 
     // config
     CONFIG_KEY_IS_EXIST("config key is exist", -10008),
+    CONFIG_KEY_IS_NOT_EXIST("config key is not exist", -10009),
 
     // limit
     ACCESS_LIMIT("not enough permission", -10007);

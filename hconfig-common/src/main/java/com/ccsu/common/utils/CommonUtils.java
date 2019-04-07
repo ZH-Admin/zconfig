@@ -1,4 +1,4 @@
-package com.ccsu.client.utils;
+package com.ccsu.common.utils;
 
 /**
  * @author hangs.zhang

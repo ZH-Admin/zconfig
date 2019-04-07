@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -29,7 +30,7 @@ public class HotConfigOnFieldManagerImpl implements HotConfigOnFieldManager {
     private static final String GET_CONFIG_URL = "http://127.0.0.1:8090/config?appName={appName}&key={key}";
 
     // key为beanName+configName，value为真正的config配置
-    private Map<String, Map<String, String>> configMap = new ConcurrentHashMap<>();
+    private volatile Map<String, Map<String, String>> configMap = new ConcurrentHashMap<>();
 
     @Autowired
     public HotConfigOnFieldManagerImpl(AppConfig appConfig, RestTemplate restTemplate) {
@@ -38,8 +39,14 @@ public class HotConfigOnFieldManagerImpl implements HotConfigOnFieldManager {
     }
 
     @Override
-    public void setConfig(String key, Map<String, String> map) {
-        configMap.put(key, map);
+    public void setConfig(String key, Map<String, String> newConfig) {
+        Map<String, String> oldConfig = configMap.get(key);
+        if(Objects.isNull(oldConfig)) {
+            configMap.put(key, newConfig);
+        } else {
+            oldConfig.clear();
+            oldConfig.putAll(newConfig);
+        }
     }
 
     @Override
@@ -49,8 +56,7 @@ public class HotConfigOnFieldManagerImpl implements HotConfigOnFieldManager {
 
     @Override
     public Map<String, String> getConfigFromRemote(String key) {
-        log.info("app name : {}     app token : {}", appConfig.getName(), appConfig.getToken());
-        log.info("key:{}", key);
+        log.info("app name : {}\tkey : {}", appConfig.getName(), key);
         // TODO: 2018/8/27 请求server，key为appName+hConfig.value  更新config
         Map<String, String> map = Maps.newHashMap();
         map.put("appName", appConfig.getName());
