@@ -21,6 +21,16 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+
+		<!-- Kafka 连接信息-->
+		<kafka.host>127.0.0.1</kafka.host>
+		<kafka.port>9092</kafka.port>
+
+		<!-- Redis 连接信息 -->
+		<redis.host>127.0.0.1</redis.host>
+		<redis.port>6379</redis.port>
+		<redis.password>redis</redis.password>
+
 		<skipTests>true</skipTests>
 	</properties>
 
