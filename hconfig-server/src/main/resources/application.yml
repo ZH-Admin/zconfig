@@ -5,10 +5,26 @@ server:
 
 # redis
 redis:
-  host: 127.0.0.1
-  port: 6379
+  host: @redis.host@
+  port: @redis.port@
   timeout: 10
   poolMaxTotal: 1000
   poolMaxIdle: 500
   poolMaxWait: 500
-  password: zhanghang
+  password: @redis.password@
+
+spring:
+  kafka:
+    bootstrap-servers: @kafka.bootstrap@
+    template:
+      default-topic: config-default-topic
+
+    producer:
+      retries: 0
+      # 每次批量发送的消息数量
+      batch-size: 16384
+      buffer-memory: 33554432
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      properties:
+        linger.ms: 1
