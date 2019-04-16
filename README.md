@@ -25,5 +25,7 @@ Elasticsearch（搜索）
 admin：hconfig上传，版本处理，配置推送，权限管理
 server：集中管理配置文件，包括存储，推送，修改
 client：加载，同步，解析并且使用字段
+common：公共依赖
+demo：实例代码
 ```
-  
+
