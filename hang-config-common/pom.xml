@@ -4,13 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.ccsu</groupId>
-        <artifactId>hconfig</artifactId>
+        <artifactId>hang-config</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>hconfig-common</artifactId>
+    <artifactId>hang-config-common</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>hconfig-common</name>
+    <name>hang-config-common</name>
     <description>HConfig Common</description>
 
     <properties>

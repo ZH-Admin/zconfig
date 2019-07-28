@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>hconfig-demo</artifactId>
+    <artifactId>hang-config-demo</artifactId>
     <packaging>jar</packaging>
 
     <name>demo</name>
@@ -10,9 +10,8 @@
 
     <parent>
         <groupId>com.ccsu</groupId>
-        <artifactId>hconfig</artifactId>
+        <artifactId>hang-config</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/>
     </parent>
 
     <properties>
@@ -24,7 +23,7 @@
     <dependencies>
         <dependency>
             <groupId>com.ccsu</groupId>
-            <artifactId>hconfig-client</artifactId>
+            <artifactId>hang-config-client</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
