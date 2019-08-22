@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hang.server.dao.PropertiesDAO">
+
+    <!--group分组之后,一个组中会有好几条数据,但是一般默认返回id最小的那一条,现在想返回version最大的那一条数据-->
+    <select id="selectLastVersionProperties" resultType="com.hang.server.entity.po.PropertiesPO">
+        select t.*
+        from (
+                 select *
+                 from properties
+                 order by version desc
+                 limit 100000000
+             ) t
+        group by t.app_name, t.properties_name;
+    </select>
+
+    <select id="selectLastVersionPropertiesByAppName" resultType="com.hang.server.entity.po.PropertiesPO">
+        select t.*
+        from (
+                 select *
+                 from properties
+                 order by version desc
+                 limit 100000000
+             ) t
+        where t.app_name = #{appName}
+        group by t.app_name, t.properties_name;
+    </select>
+
+</mapper>

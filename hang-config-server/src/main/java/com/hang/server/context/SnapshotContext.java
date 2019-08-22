@@ -4,9 +4,9 @@ package com.hang.server.context;
  * @author hangs.zhang
  * @date 2018/7/30
  * *********************
- * function: 快照上下文
+ * function: 快照上下文 快照
  */
-public class SnapContext {
+public class SnapshotContext {
 
     private static ThreadLocal<Object> threadLocal = new ThreadLocal<>();
 

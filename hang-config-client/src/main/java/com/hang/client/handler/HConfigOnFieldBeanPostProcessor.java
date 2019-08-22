@@ -58,14 +58,12 @@ public class HConfigOnFieldBeanPostProcessor implements BeanPostProcessor {
             if (obj instanceof Map) {
                 // 线程安全
                 Map<String, String> data = (ConcurrentHashMap<String, String>) obj;
-                Map<String, String> dataFromRemote = hotConfigManager
-                        .getConfigFromRemote(hConfig.value());
+                Map<String, String> dataFromRemote = hotConfigManager.getConfigFromRemote(hConfig.value());
                 // 完成远程配置的读取
                 data.putAll(dataFromRemote);
                 hotConfigManager.setConfig(hConfig.value(), data);
             }
         }
-
         return bean;
     }
 

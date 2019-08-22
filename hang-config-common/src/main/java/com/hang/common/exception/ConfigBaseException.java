@@ -10,20 +10,20 @@ import lombok.Getter;
  * function:
  */
 @Getter
-public class BaseException extends RuntimeException {
+public class ConfigBaseException extends RuntimeException {
 
     protected Integer code;
 
-    public BaseException(ResultEnum resultEnum) {
+    public ConfigBaseException(ResultEnum resultEnum) {
         super(resultEnum.getMessage());
         this.code = resultEnum.getCode();
     }
 
-    public BaseException(String message) {
+    public ConfigBaseException(String message) {
         super(message);
     }
 
-    public BaseException(Integer code) {
+    public ConfigBaseException(Integer code) {
         this.code = code;
     }
 }

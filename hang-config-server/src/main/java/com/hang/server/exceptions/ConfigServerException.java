@@ -1,7 +1,7 @@
 package com.hang.server.exceptions;
 
 import com.hang.common.enums.ResultEnum;
-import com.hang.common.exception.BaseException;
+import com.hang.common.exception.ConfigBaseException;
 import lombok.Getter;
 
 /**
@@ -11,18 +11,18 @@ import lombok.Getter;
  * function:
  */
 @Getter
-public class ServerException extends BaseException {
+public class ConfigServerException extends ConfigBaseException {
 
 
-    public ServerException(ResultEnum resultEnum) {
+    public ConfigServerException(ResultEnum resultEnum) {
         super(resultEnum);
     }
 
-    public ServerException(String message) {
+    public ConfigServerException(String message) {
         super(message);
     }
 
-    public ServerException(Integer code) {
+    public ConfigServerException(Integer code) {
         super(code);
     }
 }

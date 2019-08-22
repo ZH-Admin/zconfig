@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
  * *********************
  * function: 读取应用配置
  */
+@Data
 @Component
 @ConfigurationProperties(prefix = "my-app")
-@Data
 public class AppConfig {
 
     private String name;

@@ -21,8 +21,6 @@ public class WebConfig extends WebMvcConfigurationSupport {
 
     /**
      * 配置web静态资源位置
-     *
-     * @param registry
      */
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -37,6 +35,5 @@ public class WebConfig extends WebMvcConfigurationSupport {
                 // 不拦截
                 .excludePathPatterns("/no");
     }
-
 
 }

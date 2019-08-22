@@ -1,4 +1,4 @@
-package com.hang.server.config;
+package com.hang.server.constant;
 
 /**
  * @author hangs.zhang
@@ -6,7 +6,7 @@ package com.hang.server.config;
  * *********************
  * function:
  */
-public class ApplicationConfig {
+public class ApplicationConstant {
 
     /**
      * token的保存时间为2天

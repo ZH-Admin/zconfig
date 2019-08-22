@@ -1,7 +1,8 @@
 package com.hang.server.service.impl;
 
 import com.hang.common.enums.ResultEnum;
-import com.hang.server.exceptions.ServerException;
+import com.hang.server.exceptions.ConfigServerException;
+import com.hang.server.exceptions.Verify;
 import com.hang.server.service.ConfigManageService;
 import com.hang.server.service.KafkaMessageService;
 import com.hang.server.utils.KeyUtils;
@@ -26,7 +27,9 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class ConfigManageServiceImpl implements ConfigManageService {
 
-    // key为app-code + hConfig-value
+    /**
+     * key为app-code + hConfig-value
+     */
     private Map<String, Map<String, String>> config = Maps.newConcurrentMap();
 
     @Autowired
@@ -39,12 +42,8 @@ public class ConfigManageServiceImpl implements ConfigManageService {
 
     @Override
     public void registerConfig(String appName, String hConfigKey, Map<String, String> hConfig) {
-        if (StringUtils.isBlank(hConfigKey) || Objects.isNull(hConfig)) {
-            throw new ServerException(ResultEnum.PARAM_ERROR);
-        }
-        if (config.containsKey(KeyUtils.getRealKey(appName, hConfigKey))) {
-            throw new ServerException(ResultEnum.CONFIG_KEY_IS_EXIST);
-        }
+        Verify.verifyNotNull(ResultEnum.PARAM_ERROR, appName, hConfigKey, hConfig);
+        Verify.verify(!config.containsKey(KeyUtils.getRealKey(appName, hConfigKey)), ResultEnum.CONFIG_KEY_IS_EXIST);
 
         // TODO: 2019/4/6 config入库
         config.put(KeyUtils.getRealKey(appName, hConfigKey), hConfig);
@@ -55,7 +54,7 @@ public class ConfigManageServiceImpl implements ConfigManageService {
     @Override
     public Map<String, String> getConfig(String appName, String hConfigKey) {
         if (StringUtils.isBlank(hConfigKey) || StringUtils.isBlank(appName)) {
-            throw new ServerException(ResultEnum.PARAM_ERROR);
+            throw new ConfigServerException(ResultEnum.PARAM_ERROR);
         }
         return config.getOrDefault(KeyUtils.getRealKey(appName, hConfigKey), new ConcurrentHashMap<>());
     }
@@ -73,7 +72,7 @@ public class ConfigManageServiceImpl implements ConfigManageService {
     @Override
     public void updateAllConfig(String appName, String key, Map<String, String> properties) {
         if (!config.containsKey(KeyUtils.getRealKey(appName, key))) {
-            throw new ServerException(ResultEnum.CONFIG_KEY_IS_NOT_EXIST);
+            throw new ConfigServerException(ResultEnum.CONFIG_KEY_IS_NOT_EXIST);
         }
         config.put(KeyUtils.getRealKey(appName, key), properties);
     }

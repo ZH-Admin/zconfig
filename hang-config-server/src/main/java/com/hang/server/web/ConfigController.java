@@ -26,7 +26,9 @@ public class ConfigController {
     @Autowired
     private ConfigManageService configManageService;
 
-    // 新增
+    /**
+     * 新增
+     */
     @PostMapping("/newConfig")
     public BaseRes registerConfig(@RequestParam String appName, @RequestParam String key,
                                   @RequestBody Map config) {
@@ -35,7 +37,9 @@ public class ConfigController {
         return BaseResUtil.success();
     }
 
-    // 修改
+    /**
+     * 修改
+     */
     @PostMapping("/config")
     public BaseRes modifyConfig(@RequestBody ConfigEntity configEntity) {
         log.info("modify entity:{}", configEntity);
@@ -56,15 +60,6 @@ public class ConfigController {
                 .getConfigs(appName, Lists.newArrayList(keys.split(",")));
 
         return BaseResUtil.success(configs);
-    }
-
-    public static void main(String[] args) {
-        ConcurrentHashMap map = new ConcurrentHashMap();
-        map.put("name", "hangs.zhang");
-        map.put("timeout", "100");
-        String s = JSONObject.toJSONString(map);
-        // {"name":"hangs.zhang","timeout":"100"}
-        System.out.println(s);
     }
 
 }

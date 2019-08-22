@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
  * *****************
  * function:
  */
+@Data
 @Component
 @ConfigurationProperties(prefix = "redis")
-@Data
 public class RedisConfig {
 
     private String host;

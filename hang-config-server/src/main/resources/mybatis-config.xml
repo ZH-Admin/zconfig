@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <!--使用jdbc getGeneratedKeys获取数据库自增主键值-->
+        <setting name="useGeneratedKeys" value="true"/>
+        <!--使用列别名替代列名 默认：true-->
+        <setting name="useColumnLabel" value="true"/>
+        <!--驼峰命名转换 create_time createTime-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+
+        <setting name="cacheEnabled" value="false"/>
+        <setting name="defaultStatementTimeout" value="3000"/>
+    </settings>
+
+</configuration>

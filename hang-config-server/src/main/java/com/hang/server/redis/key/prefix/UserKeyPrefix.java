@@ -2,7 +2,7 @@ package com.hang.server.redis.key.prefix;
 
 import com.hang.server.redis.key.BasePrefix;
 
-import static com.hang.server.config.ApplicationConfig.TOKEN_EXPIRE;
+import static com.hang.server.constant.ApplicationConstant.TOKEN_EXPIRE;
 
 /**
  * @author ZhangHang

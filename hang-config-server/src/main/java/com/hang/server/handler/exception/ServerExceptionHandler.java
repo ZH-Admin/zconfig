@@ -3,7 +3,7 @@ package com.hang.server.handler.exception;
 import com.hang.common.entity.BaseRes;
 import com.hang.common.enums.ResultEnum;
 import com.hang.common.utils.BaseResUtil;
-import com.hang.server.exceptions.ServerException;
+import com.hang.server.exceptions.ConfigServerException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -34,8 +34,8 @@ public class ServerExceptionHandler {
         log.error("exception", ex);
 
         // 自定义的感兴趣的异常
-        if (ex instanceof ServerException) {
-            ServerException serverException = (ServerException) ex;
+        if (ex instanceof ConfigServerException) {
+            ConfigServerException serverException = (ConfigServerException) ex;
             return BaseResUtil.error(serverException.getCode(), serverException.getMessage());
         } else {
             // 其他异常
