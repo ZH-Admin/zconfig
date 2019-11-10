@@ -12,12 +12,10 @@
 ```
 SpringCloud（服务框架）
 SpringBoot（基础）
-SpringSecurity（权限）
 MyBatis（ORM）
 MySQL（数据库）
-Kafka（消息队列）：选择kafka的原因是在分布式配置中心中，消息的可达性并不是很重要，就是消息丢失，也不会影响到配置中心的正常使用
+Kafka（消息队列）
 Redis（NoSQL）
-Elasticsearch（搜索）
 ```
 
 ##### 模块说明
