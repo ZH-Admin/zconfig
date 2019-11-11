@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>hang-config-server</artifactId>
+    <artifactId>config-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -11,8 +11,8 @@
     <description>Hot Config Server</description>
 
     <parent>
-        <groupId>com.ccsu</groupId>
-        <artifactId>hang-config</artifactId>
+        <groupId>com.hang</groupId>
+        <artifactId>simple-config</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
@@ -24,8 +24,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.ccsu</groupId>
-            <artifactId>hang-config-common</artifactId>
+            <groupId>com.hang</groupId>
+            <artifactId>config-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
