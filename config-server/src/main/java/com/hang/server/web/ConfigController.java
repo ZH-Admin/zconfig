@@ -1,6 +1,7 @@
 package com.hang.server.web;
 
 import com.hang.common.entity.BaseRes;
+import com.hang.common.entity.bo.ConfigInfo;
 import com.hang.server.entity.request.ConfigEntity;
 import com.hang.server.service.ConfigManageService;
 import com.google.common.collect.Lists;
@@ -45,7 +46,7 @@ public class ConfigController {
     }
 
     @GetMapping("/config")
-    public BaseRes getConfig(@RequestParam String appName, @RequestParam String key) {
+    public BaseRes<ConfigInfo> getConfig(@RequestParam String appName, @RequestParam String key) {
         log.info("appName:{}, key:{}", appName, key);
         Map<String, String> config = configManageService.getConfig(appName, key);
         return BaseRes.success(config);

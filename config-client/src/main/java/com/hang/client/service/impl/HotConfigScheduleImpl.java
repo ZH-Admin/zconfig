@@ -1,19 +1,15 @@
 package com.hang.client.service.impl;
 
-import com.hang.client.service.HotConfigOnFieldManager;
-import com.hang.client.service.HotConfigSchedule;
+import com.hang.client.service.HotConfigProcessor;
+import com.hang.client.service.HotConfigScheduleProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.lang.invoke.MethodHandles;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author hangs.zhang
@@ -22,12 +18,12 @@ import java.util.concurrent.TimeUnit;
  * function:
  */
 @Service
-public class HotConfigScheduleImpl implements HotConfigSchedule {
+public class HotConfigScheduleImpl implements HotConfigScheduleProcessor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     @Resource
-    private HotConfigOnFieldManager hotConfigOnFieldManager;
+    private HotConfigProcessor hotConfigProcessor;
 
     @PostConstruct
     public void init() {
@@ -38,7 +34,7 @@ public class HotConfigScheduleImpl implements HotConfigSchedule {
     @Scheduled(cron = "0/30 * * * * *")
     public void pullData() {
         /// scheduledExecutor.scheduleAtFixedRate(() -> hotConfigOnFieldManager.updateAll(), 0, 30, TimeUnit.SECONDS);
-        hotConfigOnFieldManager.updateAll();
+        hotConfigProcessor.updateAll();
     }
 
     @Override

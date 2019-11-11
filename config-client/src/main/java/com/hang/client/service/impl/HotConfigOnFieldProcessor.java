@@ -1,11 +1,13 @@
 package com.hang.client.service.impl;
 
 import com.hang.client.config.AppConfig;
-import com.hang.client.service.HotConfigOnFieldManager;
+import com.hang.client.service.HotConfigProcessor;
 import com.hang.common.entity.BaseRes;
 import com.google.common.collect.Maps;
 import com.hang.common.exception.ConfigBaseException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -22,7 +24,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Slf4j
 @Service
-public class HotConfigOnFieldManagerImpl implements HotConfigOnFieldManager {
+public class HotConfigOnFieldProcessor implements HotConfigProcessor {
 
     @Resource
     private AppConfig appConfig;
@@ -59,7 +61,9 @@ public class HotConfigOnFieldManagerImpl implements HotConfigOnFieldManager {
         Map<String, String> requestParams = Maps.newHashMap();
         requestParams.put("appName", appConfig.getName());
         requestParams.put("key", key);
-        return retryIfFailure(GET_CONFIG_URL, requestParams);
+
+        Map<String, String> config = requestConfig(GET_CONFIG_URL, requestParams);
+        return config;
     }
 
     @Override
@@ -74,17 +78,22 @@ public class HotConfigOnFieldManagerImpl implements HotConfigOnFieldManager {
         setConfig(key, map);
     }
 
-    private Map<String, String> retryIfFailure(String url, Map<String, String> requestParams) {
+    private Map<String, String> requestConfig(String url, Map<String, String> requestParams) {
         return retryIfFailure(url, requestParams, 3);
     }
 
     private Map<String, String> retryIfFailure(String url, Map<String, String> requestParams, int times) {
         Map<String, String> result;
         try {
-            BaseRes baseRes = restTemplate.getForObject(url, BaseRes.class, requestParams);
+            BaseRes<Map<String, String>> baseRes = restTemplate.exchange(url, HttpMethod.GET,
+                    null, new ParameterizedTypeReference<BaseRes<Map<String, String>>>() {
+                    }).getBody();
             result = null;
+            Objects.requireNonNull(baseRes);
             if (baseRes.getCode() != 0) {
-                log.error("get config from config server, error code:{}, error message:{}", baseRes.getCode(), baseRes.getMessage());
+                log.error("get config from server, error code:{}, error message:{}", baseRes.getCode(), baseRes.getMessage());
+            } else {
+                result = baseRes.getData();
             }
         } catch (Exception e) {
             if (times == 0) {

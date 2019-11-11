@@ -17,12 +17,12 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class HConfigOnFieldApplicationListener implements ApplicationListener<ContextRefreshedEvent> {
+public class HConfigApplicationListener implements ApplicationListener<ContextRefreshedEvent> {
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         if (contextRefreshedEvent.getApplicationContext().getParent() == null) {
-            log.info("=====ContextRefreshedEvent====={}", contextRefreshedEvent.getSource().getClass().getName());
+            log.debug("=====ContextRefreshedEvent====={}", contextRefreshedEvent.getSource().getClass().getName());
         }
     }
 }

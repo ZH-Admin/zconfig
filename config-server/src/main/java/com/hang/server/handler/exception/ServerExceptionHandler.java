@@ -35,10 +35,10 @@ public class ServerExceptionHandler {
         // 自定义的感兴趣的异常
         if (ex instanceof ConfigServerException) {
             ConfigServerException serverException = (ConfigServerException) ex;
-            return BaseResUtil.error(serverException.getCode(), serverException.getMessage());
+            return BaseRes.error(serverException.getCode(), serverException.getMessage());
         } else {
             // 其他异常
-            return BaseResUtil.error(ResultEnum.SERVER_INNER_ERROR);
+            return BaseRes.error(ResultEnum.SERVER_INNER_ERROR);
         }
     }
 

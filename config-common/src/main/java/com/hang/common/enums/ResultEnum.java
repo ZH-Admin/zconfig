@@ -22,8 +22,14 @@ public enum ResultEnum {
     LOGIN_PASS_ERROR("pass error", -10005),
     LOGIN_MOBILE_NOT_EXIST("mobile not exist", -10006),
 
+    // client
+    CAN_NOT_CREATE_BASE_DIR("can not create base dir", -20001),
+    CAN_NOT_CREATE_CONFIG_DIR("can not create config dir", -20002),
+    CAN_NOT_CREATE_CONFIG_FILE("can not create config file", -20003),
+
     // config
     CONFIG_KEY_IS_EXIST("config key is exist", -10008),
+
     CONFIG_KEY_IS_NOT_EXIST("config key is not exist", -10009),
 
     // limit

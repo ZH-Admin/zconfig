@@ -10,7 +10,7 @@ import java.util.Map;
  *  客户端config进行管理
  *  scope：作用在field上的config
  */
-public interface HotConfigOnFieldManager {
+public interface HotConfigProcessor {
 
     void setConfig(String key, Map<String, String> map);
 

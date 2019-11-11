@@ -1,5 +1,6 @@
 package com.hang.server.service.impl;
 
+import com.hang.common.entity.bo.ConfigInfo;
 import com.hang.common.enums.ResultEnum;
 import com.hang.server.exceptions.ConfigServerException;
 import com.hang.server.exceptions.Verify;
@@ -52,11 +53,14 @@ public class ConfigManageServiceImpl implements ConfigManageService {
     }
 
     @Override
-    public Map<String, String> getConfig(String appName, String hConfigKey) {
+    public ConfigInfo getConfig(String appName, String hConfigKey) {
+        ConfigInfo configInfo = new ConfigInfo();
         if (StringUtils.isBlank(hConfigKey) || StringUtils.isBlank(appName)) {
             throw new ConfigServerException(ResultEnum.PARAM_ERROR);
         }
-        return config.getOrDefault(KeyUtils.getRealKey(appName, hConfigKey), new ConcurrentHashMap<>());
+        Map<String, String> configMap = this.config.getOrDefault(KeyUtils.getRealKey(appName, hConfigKey), new ConcurrentHashMap<>());
+        configInfo.setConfig(configMap);
+        return configInfo;
     }
 
     @Override
