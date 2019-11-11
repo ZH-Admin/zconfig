@@ -1,4 +1,3 @@
-
 insert into properties(app_name, properties_id, properties_name, properties_description, content, state, version,
                 environment)
 values ('demo', 1, 'config.properties', 'xxx', '{"name":"a"}', 2, 1, 'dev');

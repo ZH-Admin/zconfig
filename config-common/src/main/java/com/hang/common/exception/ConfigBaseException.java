@@ -26,4 +26,9 @@ public class ConfigBaseException extends RuntimeException {
     public ConfigBaseException(Integer code) {
         this.code = code;
     }
+
+    public ConfigBaseException(String message, Throwable e) {
+        super(message, e);
+    }
+
 }

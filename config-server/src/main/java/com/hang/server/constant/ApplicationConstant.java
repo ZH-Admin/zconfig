@@ -6,11 +6,16 @@ package com.hang.server.constant;
  * *********************
  * function:
  */
-public class ApplicationConstant {
+public final class ApplicationConstant {
+
+    private ApplicationConstant() {
+    }
 
     /**
      * token的保存时间为2天
      */
     public static final int TOKEN_EXPIRE = 60 * 60 * 24 * 2;
+
+    public static final String METHOD_INFO_FORMAT = "###class:%s###method:%s###args:%s###";
 
 }

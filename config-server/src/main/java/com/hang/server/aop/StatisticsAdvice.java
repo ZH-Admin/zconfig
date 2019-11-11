@@ -1,17 +1,24 @@
 package com.hang.server.aop;
 
+import com.google.common.collect.Maps;
+import com.hang.common.utils.JsonUtils;
 import com.hang.server.annotation.StatisticsTime;
 import com.google.common.base.Stopwatch;
-import lombok.extern.slf4j.Slf4j;
+import com.hang.server.constant.ApplicationConstant;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.lang.invoke.MethodHandles;
+import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -37,13 +44,33 @@ public class StatisticsAdvice {
             LOGGER.error("can^t get statistics annotation");
         }
 
-        Object result = null;
+        Object result;
+        printMethodNameAndArgs(pjp);
         try {
             result = pjp.proceed();
         } finally {
             LOGGER.info("{} cost time:{}", monitorName, started.elapsed(TimeUnit.MILLISECONDS));
         }
         return result;
+    }
+
+    /**
+     * 获取拦截的方法与参数名，以及传入的参数
+     */
+    private static void printMethodNameAndArgs(ProceedingJoinPoint pjp) {
+        MethodSignature methodSignature = (MethodSignature) pjp.getSignature();
+        String[] parameterNames = methodSignature.getParameterNames();
+        Object[] args = pjp.getArgs();
+        Map<String, Object> map = Maps.newHashMap();
+        for (int i = 0; i < parameterNames.length; i++) {
+            boolean isContinue = args[i] instanceof HttpServletResponse || args[i] instanceof HttpServletRequest
+                    || args[i] instanceof BindingResult || args[i] instanceof MultipartFile;
+            if (isContinue) {
+                continue;
+            }
+            map.put(parameterNames[i], args[i]);
+        }
+        LOGGER.info(String.format(ApplicationConstant.METHOD_INFO_FORMAT, pjp.getTarget().getClass().getName(), pjp.getSignature().getName(), JsonUtils.toJson(map)));
     }
 
 }

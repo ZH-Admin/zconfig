@@ -34,7 +34,7 @@
 
         <dependency>
             <groupId>com.hang</groupId>
-            <artifactId>hang-config-common</artifactId>
+            <artifactId>config-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>

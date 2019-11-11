@@ -9,7 +9,7 @@ import org.apache.commons.lang3.StringUtils;
  * *********************
  * function: 参数校验工具类 校验失败则抛出自定义异常
  */
-public class Verify {
+public final class Verify {
 
     private Verify() {
     }

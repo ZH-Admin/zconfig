@@ -13,7 +13,6 @@ import lombok.Getter;
 @Getter
 public class ConfigServerException extends ConfigBaseException {
 
-
     public ConfigServerException(ResultEnum resultEnum) {
         super(resultEnum);
     }
@@ -25,4 +24,9 @@ public class ConfigServerException extends ConfigBaseException {
     public ConfigServerException(Integer code) {
         super(code);
     }
+
+    public ConfigServerException(String message, Throwable e) {
+        super(message, e);
+    }
+
 }
