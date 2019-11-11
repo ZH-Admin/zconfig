@@ -1,8 +1,6 @@
 package com.hang.server.web;
 
-import com.alibaba.fastjson.JSONObject;
 import com.hang.common.entity.BaseRes;
-import com.hang.common.utils.BaseResUtil;
 import com.hang.server.entity.request.ConfigEntity;
 import com.hang.server.service.ConfigManageService;
 import com.google.common.collect.Lists;
@@ -11,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author hangs.zhang
@@ -34,7 +31,7 @@ public class ConfigController {
                                   @RequestBody Map config) {
         log.info("appName:{}, key:{}, config:{}", appName, key, config);
         configManageService.registerConfig(appName, key, config);
-        return BaseResUtil.success();
+        return BaseRes.success();
     }
 
     /**
@@ -44,14 +41,14 @@ public class ConfigController {
     public BaseRes modifyConfig(@RequestBody ConfigEntity configEntity) {
         log.info("modify entity:{}", configEntity);
         configManageService.putSectionConfig(configEntity.getAppName(), configEntity.getKey(), configEntity.getConfig());
-        return BaseResUtil.success();
+        return BaseRes.success();
     }
 
     @GetMapping("/config")
     public BaseRes getConfig(@RequestParam String appName, @RequestParam String key) {
         log.info("appName:{}, key:{}", appName, key);
         Map<String, String> config = configManageService.getConfig(appName, key);
-        return BaseResUtil.success(config);
+        return BaseRes.success(config);
     }
 
     @GetMapping("/configs")
@@ -59,7 +56,7 @@ public class ConfigController {
         Map<String, Map<String, String>> configs = configManageService
                 .getConfigs(appName, Lists.newArrayList(keys.split(",")));
 
-        return BaseResUtil.success(configs);
+        return BaseRes.success(configs);
     }
 
 }

@@ -2,7 +2,6 @@ package com.hang.server.handler.exception;
 
 import com.hang.common.entity.BaseRes;
 import com.hang.common.enums.ResultEnum;
-import com.hang.common.utils.BaseResUtil;
 import com.hang.server.exceptions.ConfigServerException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
