@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.hang</groupId>
-        <artifactId>simple-config</artifactId>
+        <artifactId>hot-config</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>config-common</artifactId>

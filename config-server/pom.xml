@@ -12,7 +12,7 @@
 
     <parent>
         <groupId>com.hang</groupId>
-        <artifactId>simple-config</artifactId>
+        <artifactId>hot-config</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 

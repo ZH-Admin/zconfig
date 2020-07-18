@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.hang</groupId>
-    <artifactId>simple-config</artifactId>
+    <artifactId>hot-config</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>simple-config</name>
+    <name>hot-config</name>
     <description>The Hot Config</description>
 
     <parent>
