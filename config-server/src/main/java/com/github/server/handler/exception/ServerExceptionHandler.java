@@ -1,7 +1,7 @@
 package com.github.server.handler.exception;
 
-import com.hang.common.entity.BaseResult;
-import com.hang.common.enums.ResultEnum;
+import com.github.common.entity.BaseResult;
+import com.github.common.enums.ResultEnum;
 import com.github.server.exceptions.ConfigServerException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;

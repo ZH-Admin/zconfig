@@ -1,4 +1,4 @@
-package com.hang.common.enums;
+package com.github.common.enums;
 
 import lombok.Getter;
 

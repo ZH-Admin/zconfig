@@ -7,10 +7,10 @@
         <artifactId>hot-config</artifactId>
         <version>1.0.0</version>
     </parent>
-    <artifactId>config-common</artifactId>
+    <artifactId>config-api</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
-    <name>config-common</name>
+    <name>config-api</name>
     <description>HConfig Common</description>
 
     <properties>
@@ -28,6 +28,15 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${com.fasterxml.jackson.version}</version>
+        </dependency>
+        <!-- openfeign -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-openfeign-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
         </dependency>
     </dependencies>
 

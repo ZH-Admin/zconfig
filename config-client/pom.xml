@@ -22,7 +22,7 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
+            <artifactId>spring-web</artifactId>
         </dependency>
 
         <dependency>
@@ -32,7 +32,7 @@
 
         <dependency>
             <groupId>com.github</groupId>
-            <artifactId>config-common</artifactId>
+            <artifactId>config-api</artifactId>
             <version>1.0.0</version>
         </dependency>
     </dependencies>

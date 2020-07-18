@@ -1,4 +1,4 @@
-package com.hang.common.utils;
+package com.github.common.utils;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
-import com.hang.common.exception.ConfigBaseException;
+import com.github.common.exception.ConfigBaseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

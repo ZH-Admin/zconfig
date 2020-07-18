@@ -1,7 +1,7 @@
 package com.github.server.web;
 
-import com.hang.common.entity.BaseResult;
-import com.hang.common.entity.bo.ConfigInfo;
+import com.github.common.entity.BaseResult;
+import com.github.common.entity.bo.ConfigInfo;
 import com.github.server.entity.request.ConfigEntity;
 import com.github.server.service.ConfigManageService;
 import com.google.common.collect.Lists;
@@ -48,15 +48,12 @@ public class ConfigController {
     @GetMapping("/config")
     public BaseResult<ConfigInfo> getConfig(@RequestParam String appName, @RequestParam String key) {
         log.info("appName:{}, key:{}", appName, key);
-        Map<String, String> config = configManageService.getConfig(appName, key);
-        return BaseResult.success(config);
+        return BaseResult.success(configManageService.getConfig(appName, key));
     }
 
     @GetMapping("/configs")
     public BaseResult getConfigs(@RequestParam String appName, @RequestParam String keys) {
-        Map<String, Map<String, String>> configs = configManageService
-                .getConfigs(appName, Lists.newArrayList(keys.split(",")));
-
+        Map<String, Map<String, String>> configs = configManageService.getConfigs(appName, Lists.newArrayList(keys.split(",")));
         return BaseResult.success(configs);
     }
 

@@ -1,8 +1,8 @@
 package com.github.client.handler;
 
 import com.github.client.annotation.HConfig;
-import com.github.client.utils.ReflectionUtils;
 import com.github.client.service.HotConfigProcessor;
+import com.github.client.utils.ReflectionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -21,11 +21,11 @@ import java.util.concurrent.ConcurrentHashMap;
  * *********************
  * function:
  * BeanPostProcessor接口: Spring的后置处理器，在IoC完成bean实例化、配置以及其他初始化方法前后要添加一些自己逻辑处理
- * HConfigOnFieldBeanPostProcessor: 在客户端初始化bean过程中，生成配置（从hotConfigManager中获取）
+ * HConfigBeanPostProcessor: 在客户端初始化bean过程中，生成配置（从hotConfigManager中获取）
  */
 @Component
 @Slf4j
-public class HConfigOnFieldBeanPostProcessor implements BeanPostProcessor {
+public class HConfigBeanPostProcessor implements BeanPostProcessor {
 
     @Resource
     private HotConfigProcessor hotConfigProcessor;

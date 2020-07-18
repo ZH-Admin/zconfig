@@ -1,8 +1,8 @@
 package com.github.client.service;
 
 import com.google.common.base.Preconditions;
-import com.hang.common.enums.ResultEnum;
-import com.hang.common.exception.ConfigBaseException;
+import com.github.common.enums.ResultEnum;
+import com.github.common.exception.ConfigBaseException;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Service;
 

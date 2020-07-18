@@ -1,6 +1,6 @@
 package com.github.server.exceptions;
 
-import com.hang.common.enums.ResultEnum;
+import com.github.common.enums.ResultEnum;
 import org.apache.commons.lang3.StringUtils;
 
 /**

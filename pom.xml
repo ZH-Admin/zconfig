@@ -16,9 +16,8 @@
     <description>The Hot Config</description>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <spring-cloud.version>Hoxton.SR6</spring-cloud.version>
         <com.fasterxml.jackson.version>2.10.1</com.fasterxml.jackson.version>
 
         <!-- Kafka 连接信息-->
@@ -35,12 +34,24 @@
     </properties>
 
     <modules>
-        <module>config-common</module>
+        <module>config-api</module>
         <module>config-client</module>
         <module>config-server</module>
         <module>config-admin</module>
         <module>config-demo</module>
     </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <!-- 日志 -->

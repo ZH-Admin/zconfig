@@ -2,16 +2,18 @@ package com.github.client.service.impl;
 
 import com.github.client.config.AppConfig;
 import com.github.client.service.HotConfigProcessor;
-import com.hang.common.entity.BaseResult;
 import com.google.common.collect.Maps;
-import com.hang.common.exception.ConfigBaseException;
-import lombok.extern.slf4j.Slf4j;
+import com.github.common.entity.BaseResult;
+import com.github.common.exception.ConfigBaseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
+import java.lang.invoke.MethodHandles;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -22,7 +24,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * *********************
  * function:
  */
-@Slf4j
 @Service
 public class HotConfigOnFieldProcessor implements HotConfigProcessor {
 
@@ -31,6 +32,8 @@ public class HotConfigOnFieldProcessor implements HotConfigProcessor {
 
     @Resource(name = "configRestTemplate")
     private RestTemplate restTemplate;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     private static final String GET_CONFIG_URL = "http://127.0.0.1:8090/config?appName={appName}&key={key}";
 
@@ -57,18 +60,17 @@ public class HotConfigOnFieldProcessor implements HotConfigProcessor {
 
     @Override
     public Map<String, String> getConfigFromRemote(String key) {
-        log.info("app name : {}\tkey : {}", appConfig.getName(), key);
+        LOGGER.info("app name : {} key : {}", appConfig.getName(), key);
         Map<String, String> requestParams = Maps.newHashMap();
         requestParams.put("appName", appConfig.getName());
         requestParams.put("key", key);
 
-        Map<String, String> config = requestConfig(GET_CONFIG_URL, requestParams);
-        return config;
+        return requestConfig(GET_CONFIG_URL, requestParams);
     }
 
     @Override
     public void updateAll() {
-        log.info("Pull Hot Config");
+        LOGGER.info("Pull Hot Config");
         configMap.forEach((k, v) -> updateByKey(k));
     }
 
@@ -91,7 +93,7 @@ public class HotConfigOnFieldProcessor implements HotConfigProcessor {
             result = null;
             Objects.requireNonNull(baseRes);
             if (baseRes.getCode() != 0) {
-                log.error("get config from server, error code:{}, error message:{}", baseRes.getCode(), baseRes.getMessage());
+                LOGGER.error("get config from server, error code:{}, error message:{}", baseRes.getCode(), baseRes.getMessage());
             } else {
                 result = baseRes.getData();
             }
@@ -100,7 +102,7 @@ public class HotConfigOnFieldProcessor implements HotConfigProcessor {
                 throw new ConfigBaseException("已重试三次, 无法获取数据");
             }
             result = retryIfFailure(url, requestParams, times - 1);
-            log.error("request config", e);
+            LOGGER.error("request config", e);
         }
         return result;
     }

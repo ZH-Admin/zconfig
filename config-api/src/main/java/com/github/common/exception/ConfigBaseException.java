@@ -1,6 +1,6 @@
-package com.hang.common.exception;
+package com.github.common.exception;
 
-import com.hang.common.enums.ResultEnum;
+import com.github.common.enums.ResultEnum;
 import lombok.Getter;
 
 /**

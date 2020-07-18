@@ -1,4 +1,4 @@
-package com.hang.common.entity.bo;
+package com.github.common.entity.bo;
 
 import lombok.Data;
 
@@ -12,6 +12,12 @@ import java.util.Map;
  */
 @Data
 public class ConfigInfo {
+
+    private String appName;
+
+    private String appToken;
+
+    private String configName;
 
     private Integer version;
 

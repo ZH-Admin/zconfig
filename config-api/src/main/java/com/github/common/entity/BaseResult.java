@@ -1,6 +1,6 @@
-package com.hang.common.entity;
+package com.github.common.entity;
 
-import com.hang.common.enums.ResultEnum;
+import com.github.common.enums.ResultEnum;
 import lombok.Data;
 
 /**

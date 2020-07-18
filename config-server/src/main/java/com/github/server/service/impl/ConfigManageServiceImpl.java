@@ -1,8 +1,8 @@
 package com.github.server.service.impl;
 
 import com.github.server.utils.KeyUtils;
-import com.hang.common.entity.bo.ConfigInfo;
-import com.hang.common.enums.ResultEnum;
+import com.github.common.entity.bo.ConfigInfo;
+import com.github.common.enums.ResultEnum;
 import com.github.server.exceptions.ConfigServerException;
 import com.github.server.exceptions.Verify;
 import com.github.server.service.ConfigManageService;
