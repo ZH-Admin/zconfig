@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.6.RELEASE</version>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>com.hang</groupId>
+    <groupId>com.github</groupId>
     <artifactId>hot-config</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
 
     <name>hot-config</name>
     <description>The Hot Config</description>
-
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.4.RELEASE</version>
-    </parent>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -36,19 +34,15 @@
         <skipTests>true</skipTests>
     </properties>
 
-    <dependencies>
-        <!-- jackson序列化 -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>${com.fasterxml.jackson.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${com.fasterxml.jackson.version}</version>
-        </dependency>
+    <modules>
+        <module>config-common</module>
+        <module>config-client</module>
+        <module>config-server</module>
+        <module>config-admin</module>
+        <module>config-demo</module>
+    </modules>
 
+    <dependencies>
         <!-- 日志 -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -80,15 +74,6 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-
     </dependencies>
-
-    <modules>
-        <module>config-common</module>
-        <module>config-client</module>
-        <module>config-server</module>
-        <module>config-admin</module>
-        <module>config-demo</module>
-    </modules>
 
 </project>

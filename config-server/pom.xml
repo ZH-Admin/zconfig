@@ -4,16 +4,16 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>config-server</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <name>config-server</name>
     <description>Hot Config Server</description>
 
     <parent>
-        <groupId>com.hang</groupId>
+        <groupId>com.github</groupId>
         <artifactId>hot-config</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
 
     <properties>
@@ -24,9 +24,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.hang</groupId>
+            <groupId>com.github</groupId>
             <artifactId>config-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>1.0.0</version>
         </dependency>
 
         <dependency>

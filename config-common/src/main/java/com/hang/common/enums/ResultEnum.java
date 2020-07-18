@@ -35,9 +35,9 @@ public enum ResultEnum {
     // limit
     ACCESS_LIMIT("not enough permission", -10007);
 
-    private String message;
+    private final String message;
 
-    private Integer code;
+    private final Integer code;
 
     ResultEnum(String msg, Integer code) {
         this.message = msg;
