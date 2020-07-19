@@ -1,7 +1,6 @@
 package com.github.server.web;
 
 import com.github.common.entity.BaseResult;
-import com.github.common.entity.bo.ConfigInfo;
 import com.github.server.entity.request.ConfigEntity;
 import com.github.server.service.ConfigManageService;
 import com.google.common.collect.Lists;
@@ -18,7 +17,7 @@ import java.util.Map;
  * function:
  */
 @Slf4j
-@RestController
+//@RestController
 public class ConfigController {
 
     @Autowired
@@ -46,7 +45,7 @@ public class ConfigController {
     }
 
     @GetMapping("/config")
-    public BaseResult<ConfigInfo> getConfig(@RequestParam String appName, @RequestParam String key) {
+    public BaseResult<Map<String, String>> getConfig(@RequestParam String appName, @RequestParam String key) {
         log.info("appName:{}, key:{}", appName, key);
         return BaseResult.success(configManageService.getConfig(appName, key));
     }

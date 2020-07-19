@@ -16,16 +16,11 @@ public interface PropertiesDAO {
 
     /**
      * 查询每一个appName对应的version最大的配置文件
-     *
-     * @return
      */
     List<PropertiesPO> selectLastVersionProperties();
 
     /**
      * 根据appName获取每一个version最大的配置文件
-     *
-     * @param appName
-     * @return
      */
     List<PropertiesPO> selectLastVersionPropertiesByAppName(String appName);
 

@@ -21,6 +21,4 @@ public class ConfigInfo {
 
     private Integer version;
 
-    private Map<String, String> config;
-
 }

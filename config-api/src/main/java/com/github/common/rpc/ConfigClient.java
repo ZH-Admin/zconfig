@@ -1,6 +1,5 @@
 package com.github.common.rpc;
 
-import com.github.common.entity.BaseResult;
 import com.github.common.entity.bo.ConfigInfo;
 import com.github.common.rpc.fallback.ConfigClientFallback;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -18,6 +17,9 @@ import java.util.Map;
 public interface ConfigClient {
 
     @GetMapping("/config")
-    BaseResult<Map<String, String>> getConfig(ConfigInfo request);
+    Map<String, String> getConfig(ConfigInfo request);
+
+    @GetMapping("/checkUpdate")
+    boolean checkUpdate(ConfigInfo configInfo);
 
 }

@@ -22,7 +22,7 @@ public interface ConfigManageService {
     /**
      * 获取单个配置
      */
-    ConfigInfo getConfig(String appName, String key);
+    Map<String, String> getConfig(String appName, String key);
 
     /**
      * 获取所有配置

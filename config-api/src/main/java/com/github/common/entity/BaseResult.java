@@ -18,7 +18,7 @@ public class BaseResult<T> {
 
     private T data;
 
-    public static <T> BaseResult success(T obj) {
+    public static <T> BaseResult<T> success(T obj) {
         BaseResult<T> baseRes = new BaseResult<>();
         baseRes.setCode(ResultEnum.SUCCESS.getCode());
         baseRes.setMessage(ResultEnum.SUCCESS.getMessage());
@@ -26,11 +26,11 @@ public class BaseResult<T> {
         return baseRes;
     }
 
-    public static <T> BaseResult success() {
+    public static <T> BaseResult<T> success() {
         return success(null);
     }
 
-    public static <T> BaseResult error(Integer code, String msg) {
+    public static <T> BaseResult<T> error(Integer code, String msg) {
         BaseResult<T> baseRes = new BaseResult<>();
         baseRes.setCode(code);
         baseRes.setMessage(msg);
@@ -38,7 +38,7 @@ public class BaseResult<T> {
         return baseRes;
     }
 
-    public static <T> BaseResult error(ResultEnum resultEnum) {
+    public static <T> BaseResult<T> error(ResultEnum resultEnum) {
         BaseResult<T> baseRes = new BaseResult<>();
         baseRes.setCode(resultEnum.getCode());
         baseRes.setMessage(resultEnum.getMessage());

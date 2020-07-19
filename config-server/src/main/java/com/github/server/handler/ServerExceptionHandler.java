@@ -1,14 +1,16 @@
-package com.github.server.handler.exception;
+package com.github.server.handler;
 
 import com.github.common.entity.BaseResult;
 import com.github.common.enums.ResultEnum;
 import com.github.server.exceptions.ConfigServerException;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.lang.invoke.MethodHandles;
 import java.util.Map;
 
 /**
@@ -19,20 +21,17 @@ import java.util.Map;
  */
 @ResponseBody
 @ControllerAdvice
-@Slf4j
 public class ServerExceptionHandler {
 
-    @ExceptionHandler(value = Exception.class)
-    public BaseResult exceptionHandler(Exception ex, HttpServletRequest request) {
-        Map<String, String[]> parameterMap = request.getParameterMap();
-        // 打印发生异常的请求参数
-        parameterMap.forEach((key, value) -> log.error("error param {}:{}", key, value));
-        // 打印请求的路径，可以根据这个路径去在监控中mark
-        log.error("RequestURI {}", request.getRequestURI());
-        // 打印异常堆栈
-        log.error("exception", ex);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-        // 自定义的感兴趣的异常
+    @ExceptionHandler(value = Exception.class)
+    public BaseResult<?> exceptionHandler(Exception ex, HttpServletRequest request) {
+        Map<String, String[]> parameterMap = request.getParameterMap();
+        parameterMap.forEach((key, value) -> LOGGER.error("error param {}:{}", key, value));
+        LOGGER.error("RequestURI {}", request.getRequestURI());
+        LOGGER.error("exception", ex);
+
         if (ex instanceof ConfigServerException) {
             ConfigServerException serverException = (ConfigServerException) ex;
             return BaseResult.error(serverException.getCode(), serverException.getMessage());

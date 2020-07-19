@@ -1,12 +1,12 @@
 package com.github.server.service.impl;
 
-import com.github.server.utils.KeyUtils;
 import com.github.common.entity.bo.ConfigInfo;
 import com.github.common.enums.ResultEnum;
 import com.github.server.exceptions.ConfigServerException;
 import com.github.server.exceptions.Verify;
 import com.github.server.service.ConfigManageService;
 import com.github.server.service.KafkaMessageService;
+import com.github.server.utils.KeyUtils;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -53,14 +53,13 @@ public class ConfigManageServiceImpl implements ConfigManageService {
     }
 
     @Override
-    public ConfigInfo getConfig(String appName, String hConfigKey) {
+    public Map<String, String> getConfig(String appName, String hConfigKey) {
         ConfigInfo configInfo = new ConfigInfo();
         if (StringUtils.isBlank(hConfigKey) || StringUtils.isBlank(appName)) {
             throw new ConfigServerException(ResultEnum.PARAM_ERROR);
         }
         Map<String, String> configMap = this.config.getOrDefault(KeyUtils.getRealKey(appName, hConfigKey), new ConcurrentHashMap<>());
-        configInfo.setConfig(configMap);
-        return configInfo;
+        return configMap;
     }
 
     @Override
