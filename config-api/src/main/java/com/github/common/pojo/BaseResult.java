@@ -1,4 +1,4 @@
-package com.github.common.entity;
+package com.github.common.pojo;
 
 import com.github.common.enums.ResultEnum;
 import lombok.Data;

@@ -1,8 +1,6 @@
-package com.github.common.entity.bo;
+package com.github.common.pojo.bo;
 
 import lombok.Data;
-
-import java.util.Map;
 
 /**
  * @author hangs.zhang
@@ -14,10 +12,6 @@ import java.util.Map;
 public class ConfigInfo {
 
     private String appName;
-
-    private String appToken;
-
-    private String configName;
 
     private Integer version;
 

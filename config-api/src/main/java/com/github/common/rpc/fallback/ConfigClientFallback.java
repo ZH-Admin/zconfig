@@ -1,8 +1,10 @@
 package com.github.common.rpc.fallback;
 
-import com.github.common.entity.bo.ConfigInfo;
+import com.github.common.pojo.bo.ConfigInfo;
 import com.github.common.rpc.ConfigClient;
 import org.springframework.stereotype.Component;
+
+import java.util.Map;
 
 /**
  * @author hangs.zhang
@@ -13,9 +15,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class ConfigClientFallback implements ConfigClient {
 
+
     @Override
-    public ConfigInfo getConfig(ConfigInfo request) {
+    public Map<String, String> getConfig(ConfigInfo request) {
         return null;
+    }
+
+    @Override
+    public boolean checkUpdate(ConfigInfo configInfo) {
+        return false;
     }
 
 }

@@ -31,4 +31,8 @@ public class ConfigBaseException extends RuntimeException {
         super(message, e);
     }
 
+    public ConfigBaseException(Throwable e) {
+        super(e);
+    }
+
 }

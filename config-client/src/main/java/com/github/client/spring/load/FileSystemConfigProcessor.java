@@ -1,10 +1,11 @@
-package com.github.client.service;
+package com.github.client.spring.load;
 
-import com.google.common.base.Preconditions;
+import com.github.client.utils.Constant;
 import com.github.common.enums.ResultEnum;
 import com.github.common.exception.ConfigBaseException;
+import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.ObjectUtils;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
@@ -14,7 +15,6 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author hangs.zhang
@@ -22,20 +22,12 @@ import java.util.concurrent.atomic.AtomicInteger;
  * *****************
  * function:
  */
-@Service
+@Component
 public class FileSystemConfigProcessor {
-
-    private final static String BASE_DIR = "~/.cache";
-
-    private final static String CONFIG_PATH = BASE_DIR + "/%s";
-
-    private final static String CONFIG_VERSION_ABSOLUTE_PATH = CONFIG_PATH + "/%s";
-
-    private ConcurrentHashMap<String, AtomicInteger> versions = new ConcurrentHashMap<>(4);
 
     @PostConstruct
     public void init() {
-        File baseDir = new File(BASE_DIR);
+        File baseDir = new File(Constant.BASE_DIR);
         if (!baseDir.exists()) {
             if (!baseDir.mkdir()) {
                 throw new ConfigBaseException(ResultEnum.CAN_NOT_CREATE_BASE_DIR);
@@ -43,17 +35,17 @@ public class FileSystemConfigProcessor {
         }
     }
 
-    public void store2File(String configName, String version, Map<String, String> config) throws IOException {
-        Preconditions.checkArgument(ObjectUtils.allNotNull(configName, version, config), "configName or version or config is null");
+    public void store2File(String dataId, String version, Map<String, String> config) throws IOException {
+        Preconditions.checkArgument(ObjectUtils.allNotNull(dataId, version, config), "dataId or version or config is null");
 
-        File configDir = new File(String.format(CONFIG_PATH, configName));
+        File configDir = new File(String.format(Constant.CONFIG_PATH, dataId));
         if (!configDir.exists()) {
             if (!configDir.mkdir()) {
                 throw new ConfigBaseException(ResultEnum.CAN_NOT_CREATE_CONFIG_DIR);
             }
         }
 
-        File configFile = new File(String.format(CONFIG_VERSION_ABSOLUTE_PATH, version));
+        File configFile = new File(String.format(Constant.CONFIG_VERSION_ABSOLUTE_PATH, version));
         configFile.deleteOnExit();
         if (!configFile.createNewFile()) {
             throw new ConfigBaseException(ResultEnum.CAN_NOT_CREATE_CONFIG_FILE);
@@ -67,7 +59,7 @@ public class FileSystemConfigProcessor {
     public Map<String, String> loadFromFile(String configName, String version) throws IOException {
         Preconditions.checkArgument(ObjectUtils.allNotNull(configName, version), "configName or version or config is null");
 
-        File file = new File(String.format(CONFIG_VERSION_ABSOLUTE_PATH, configName, version));
+        File file = new File(String.format(Constant.CONFIG_VERSION_ABSOLUTE_PATH, configName, version));
         Properties properties = new Properties();
         properties.load(new FileReader(file));
         Map<String, String> map = new ConcurrentHashMap<>(properties.size());

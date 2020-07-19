@@ -1,7 +1,5 @@
 package com.github.server.service;
 
-import com.github.common.entity.bo.ConfigInfo;
-
 import java.util.List;
 import java.util.Map;
 

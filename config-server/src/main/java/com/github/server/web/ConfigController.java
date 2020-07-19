@@ -1,6 +1,6 @@
 package com.github.server.web;
 
-import com.github.common.entity.BaseResult;
+import com.github.common.pojo.BaseResult;
 import com.github.server.entity.request.ConfigEntity;
 import com.github.server.service.ConfigManageService;
 import com.google.common.collect.Lists;
