@@ -1,6 +1,7 @@
 package com.github.client.spring;
 
 import com.github.client.annotation.HConfig;
+import com.github.client.model.ConfigData;
 import com.github.client.spring.load.HotConfigOnFieldProcessor;
 import com.github.client.utils.ReflectionUtils;
 import com.github.common.exception.ConfigBaseException;
@@ -47,9 +48,10 @@ public class HConfigBeanPostProcessor implements BeanPostProcessor {
                 // 线程安全
                 Map<String, String> data = (ConcurrentHashMap<String, String>) obj;
                 // 完成远程配置的读取
-                Map<String, String> dataFromRemote = hotConfigProcessor.getConfig(hConfig.value());
-                data.putAll(dataFromRemote);
-                hotConfigProcessor.putConfig2Field(hConfig.value(), data);
+                ConfigData config = hotConfigProcessor.getConfig(hConfig.value());
+                // Map<String, String> dataFromRemote = hotConfigProcessor.getConfig(hConfig.value());
+                // data.putAll(dataFromRemote);
+                // hotConfigProcessor.putConfig2Field(hConfig.value(), data);
             } else {
                 throw new ConfigBaseException("not suppoert this type : " + obj.getClass());
             }
