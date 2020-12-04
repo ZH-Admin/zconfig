@@ -1,6 +1,8 @@
 package com.github.common.rpc.fallback;
 
 import com.github.common.pojo.bo.ConfigInfo;
+import com.github.common.pojo.bo.ConfigRequest;
+import com.github.common.pojo.bo.ConfigResponse;
 import com.github.common.rpc.ConfigClient;
 import org.springframework.stereotype.Component;
 
@@ -15,15 +17,13 @@ import java.util.Map;
 @Component
 public class ConfigClientFallback implements ConfigClient {
 
-
     @Override
-    public Map<String, String> getConfig(ConfigInfo request) {
+    public ConfigResponse getConfig(ConfigRequest configRequest) {
         return null;
     }
 
     @Override
-    public boolean checkUpdate(ConfigInfo configInfo) {
+    public boolean checkUpdate(ConfigRequest configRequest) {
         return false;
     }
-
 }
