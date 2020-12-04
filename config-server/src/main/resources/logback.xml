@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+    <property name="PATTERN" value="%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level[%18.-18thread][%36.-36logger{36}][%20.-20method]:%-3.3L : %msg%n"/>
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <!-- encoder 默认配置为PatternLayoutEncoder -->
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %level -> %msg%n</pattern>
+            <pattern>${PATTERN}</pattern>
         </encoder>
     </appender>
 
-    <root level="debug">
+    <root level="INFO">
         <appender-ref ref="CONSOLE"/>
     </root>
 

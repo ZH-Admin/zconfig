@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.server.dao.PropertiesDAO">
+
+    <sql id="tAllColumn">
+        t1.id, t1.app_name, t1.properties_name, t1.properties_description, t1.content, t1.version
+    </sql>
+
+    <sql id="allColumn">
+        id, app_name, properties_name, properties_description, content, version
+    </sql>
+
+    <!-- group分组之后, 一个组中会有好几条数据, 但是一般默认返回id最小的那一条, 现在想返回version最大的那一条数据 -->
+    <select id="selectLastVersionProperties" resultType="com.github.server.entity.po.PropertiesPO">
+        select
+            <include refid="tAllColumn"/>
+        from
+            (select <include refid="allColumn"/> from properties) as t1
+        join
+            (select app_name, properties_name, max(version) as version from properties group by app_name, properties_name) as t2
+        on
+            t1.app_name = t2.app_name and t1.properties_name = t2.properties_name and t1.version = t2.version;
+    </select>
+
+    <select id="selectLastVersionPropertiesByAppName" resultType="com.github.server.entity.po.PropertiesPO">
+        select
+            <include refid="tAllColumn"/>
+        from
+            (select <include refid="allColumn"/> from properties) as t1
+        join
+            (select app_name, properties_name, max(version) as version from properties group by app_name, properties_name) as t2
+        on
+            t1.app_name = t2.app_name and t1.properties_name = t2.properties_name and t1.version = t2.version
+        where
+            t1.app_name = #{appName}
+    </select>
+
+</mapper>

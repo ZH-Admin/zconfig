@@ -5,12 +5,10 @@ import com.github.common.enums.ResultEnum;
 import com.github.server.exceptions.ConfigServerException;
 import com.github.server.exceptions.Verify;
 import com.github.server.service.ConfigManageService;
-import com.github.server.service.KafkaMessageService;
 import com.github.server.utils.KeyUtils;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,9 +31,6 @@ public class ConfigManageServiceImpl implements ConfigManageService {
      */
     private Map<String, Map<String, String>> config = Maps.newConcurrentMap();
 
-    @Autowired
-    private KafkaMessageService kafkaMessageService;
-
     @Override
     public void initConfig(String key) {
         // TODO: 2019/4/6 从数据库中加载config
@@ -48,8 +43,7 @@ public class ConfigManageServiceImpl implements ConfigManageService {
 
         // TODO: 2019/4/6 config入库
         config.put(KeyUtils.getRealKey(appName, hConfigKey), hConfig);
-        // 主动通知客户端
-        kafkaMessageService.sendMessage(appName, "");
+        // TODO: 2020/12/4 主动通知客户端
     }
 
     @Override

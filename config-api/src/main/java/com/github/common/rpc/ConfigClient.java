@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * *****************
  * function:
  */
-@FeignClient(name = "HCONFIG-SERVER-SERVICE", fallback = ConfigClientFallback.class)
+@FeignClient(name = "CONFIG-SERVER", fallback = ConfigClientFallback.class)
 public interface ConfigClient {
 
     @GetMapping("/config")

@@ -36,5 +36,8 @@ public class PropertiesDAOTest {
 
     @Test
     public void selectLastVersionPropertiesByAppName() {
+        List<PropertiesPO> properties = propertiesDAO.selectLastVersionPropertiesByAppName("demo");
+        LOGGER.info("data:{}", properties);
     }
+
 }

@@ -13,7 +13,9 @@ import java.lang.annotation.*;
 @Documented
 public @interface StatisticsTime {
 
-    // 监控名前缀
+    /**
+     * 监控名前缀
+     */
     String value() default "";
 
 }

@@ -1,11 +1,10 @@
 package com.github.server.web;
 
-import com.github.common.pojo.bo.ConfigInfo;
+import com.github.common.pojo.bo.ConfigRequest;
+import com.github.common.pojo.bo.ConfigResponse;
 import com.github.common.rpc.ConfigClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Map;
 
 /**
  * @author hangs.zhang
@@ -18,13 +17,13 @@ public class IConfigController implements ConfigClient {
 
     @Override
     @GetMapping("/config")
-    public Map<String, String> getConfig(ConfigInfo request) {
+    public ConfigResponse getConfig(ConfigRequest configRequest) {
         return null;
     }
 
     @Override
     @GetMapping("/checkUpdate")
-    public boolean checkUpdate(ConfigInfo configInfo) {
+    public boolean checkUpdate(ConfigRequest configRequest) {
         return false;
     }
 
