@@ -3,12 +3,10 @@ package com.github.server;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 /**
- * @author zhanghang
+ * @author plum-wine
  */
-@EnableEurekaServer
 @SpringBootApplication
 @MapperScan(basePackages = "com.github.server.dao")
 public class ConfigServerApplication {

@@ -1,4 +1,4 @@
-package com.github.server.handler;
+package com.github.server.exceptions.handler;
 
 import com.github.common.pojo.BaseResult;
 import com.github.common.enums.ResultEnum;

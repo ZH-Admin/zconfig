@@ -1,6 +1,6 @@
 package com.github.demo.web;
 
-import com.github.demo.service.common.HelloService;
+import com.github.demo.service.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

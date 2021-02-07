@@ -1,27 +1,23 @@
-#### hangs-config
+# hot-config
 
-##### 前言
-1，QConfig是作者在去哪儿网实习的时候，使用到的一款内部的分布式配置中心，QConfig的功能很强大而又简单易用，同时还保证了配置的高可用，任何一个节点或者组件宕机都不会影响到客户端使用配置。作者觉得很有意思，所以就探究了一番原理，准备跟着模仿一个，一是为了更好的理解分布式配置中心，二就是通过编码对分布式系统进行实践
+## 技术栈选择
+### RPC
+Feign
+### Framework
+SpringBoot
+### ORM
+MyBatis
+### RDB
+MySQL
 
-#### 进度
-2019-04-07：完成基本的远端拉取配置，修改配置后客户端感知
-
-##### 技术栈
-```
-SpringCloud（服务框架）
-SpringBoot（基础）
-MyBatis（ORM）
-MySQL（数据库）
-RocketMQ（消息队列）
-Redis（NoSQL）
-```
-
-##### 模块说明
-```
-admin：hconfig上传，版本处理，配置推送，权限管理
-server：集中管理配置文件，包括存储，推送，修改
-client：加载，同步，解析并且使用字段
-common：公共依赖
-demo：实例代码
-```
-
+## 模块说明
+### config-admin
+hconfig上传，版本处理，配置推送，权限管理
+### config-server
+集中管理配置文件，包括存储，推送，修改
+### config-client
+加载，同步，解析并且使用字段
+### config-api
+公共依赖
+### config-demo
+示例代码

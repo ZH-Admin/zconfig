@@ -63,8 +63,10 @@ public class StatisticsAdvice {
         Object[] args = pjp.getArgs();
         Map<String, Object> map = Maps.newHashMap();
         for (int i = 0; i < parameterNames.length; i++) {
-            boolean isContinue = args[i] instanceof HttpServletResponse || args[i] instanceof HttpServletRequest
-                    || args[i] instanceof BindingResult || args[i] instanceof MultipartFile;
+            boolean isContinue = args[i] instanceof HttpServletResponse
+                    || args[i] instanceof HttpServletRequest
+                    || args[i] instanceof BindingResult
+                    || args[i] instanceof MultipartFile;
             if (isContinue) {
                 continue;
             }

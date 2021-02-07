@@ -6,15 +6,13 @@ package com.github.server.utils;
  * *****************
  * function:
  */
-public class KeyUtils {
+public final class KeyUtils {
 
     private KeyUtils() {
-        throw new RuntimeException("KeyUtils not allow structure");
     }
 
     public static String getRealKey(String appName, String hConfigKey) {
         return appName + "-" + hConfigKey;
     }
-
 
 }

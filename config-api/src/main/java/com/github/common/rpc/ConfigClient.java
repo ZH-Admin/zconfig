@@ -2,7 +2,6 @@ package com.github.common.rpc;
 
 import com.github.common.pojo.bo.ConfigRequest;
 import com.github.common.pojo.bo.ConfigResponse;
-import com.github.common.rpc.fallback.ConfigClientFallback;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * *****************
  * function:
  */
-@FeignClient(name = "CONFIG-SERVER", fallback = ConfigClientFallback.class)
+@FeignClient(name = "CONFIG-SERVER", url = "http://127.0.0.1:8085")
 public interface ConfigClient {
 
     @GetMapping("/config")

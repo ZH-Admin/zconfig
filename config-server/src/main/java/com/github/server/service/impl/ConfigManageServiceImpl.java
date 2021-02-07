@@ -3,14 +3,16 @@ package com.github.server.service.impl;
 import com.github.common.pojo.bo.ConfigInfo;
 import com.github.common.enums.ResultEnum;
 import com.github.server.exceptions.ConfigServerException;
-import com.github.server.exceptions.Verify;
+import com.github.server.exceptions.utils.Verify;
 import com.github.server.service.ConfigManageService;
 import com.github.server.utils.KeyUtils;
 import com.google.common.collect.Maps;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.lang.invoke.MethodHandles;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -22,9 +24,10 @@ import java.util.concurrent.ConcurrentHashMap;
  * *****************
  * function:
  */
-@Slf4j
 @Service
 public class ConfigManageServiceImpl implements ConfigManageService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     /**
      * key为app-code + hConfig-value
@@ -52,8 +55,7 @@ public class ConfigManageServiceImpl implements ConfigManageService {
         if (StringUtils.isBlank(hConfigKey) || StringUtils.isBlank(appName)) {
             throw new ConfigServerException(ResultEnum.PARAM_ERROR);
         }
-        Map<String, String> configMap = this.config.getOrDefault(KeyUtils.getRealKey(appName, hConfigKey), new ConcurrentHashMap<>());
-        return configMap;
+        return this.config.getOrDefault(KeyUtils.getRealKey(appName, hConfigKey), new ConcurrentHashMap<>());
     }
 
     @Override
@@ -95,7 +97,7 @@ public class ConfigManageServiceImpl implements ConfigManageService {
         }
 
         map.put(hConfigKey, hConfigValue);
-        log.info("all config:{}", config);
+        LOGGER.info("all config:{}", config);
         // TODO: 2019/4/7 配置入库
     }
 

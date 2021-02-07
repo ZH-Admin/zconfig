@@ -95,13 +95,13 @@ public class ReflectionUtils {
         return getMethods(obj.getClass());
     }
 
-    public static List<Method> getMethodContainAnnotation(Object obj, Class annotation) {
+    public static List<Method> getMethodContainAnnotation(Object obj, Class<Annotation> annotation) {
         Preconditions.checkArgument(ObjectUtils.allNotNull(obj, annotation), "obj or annotation is null");
 
         return getMethodContainAnnotation(obj.getClass(), annotation);
     }
 
-    public static List<Method> getMethodContainAnnotation(Class clazz, Class annotation) {
+    public static List<Method> getMethodContainAnnotation(Class<?> clazz, Class<Annotation> annotation) {
         Preconditions.checkArgument(ObjectUtils.allNotNull(clazz, annotation), "clazz or annotation is null");
 
         List<Method> result = new ArrayList<>();

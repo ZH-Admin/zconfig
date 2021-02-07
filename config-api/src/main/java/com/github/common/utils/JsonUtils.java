@@ -42,7 +42,6 @@ public final class JsonUtils {
         OBJECT_MAPPER.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
         // 主要用于日志答应输出全部
         OBJECT_MAPPER.setFilterProvider(theFilter);
-        OBJECT_MAPPER.enable(JsonGenerator.Feature.ESCAPE_NON_ASCII);
     }
 
     private JsonUtils() {
