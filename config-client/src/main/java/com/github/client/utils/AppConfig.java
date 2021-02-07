@@ -1,6 +1,6 @@
 package com.github.client.utils;
 
-import com.github.common.exception.ConfigBaseException;
+import com.github.exception.ConfigBaseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

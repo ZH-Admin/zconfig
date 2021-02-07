@@ -1,6 +1,6 @@
-package com.github.common.pojo;
+package com.github.pojo;
 
-import com.github.common.enums.ResultEnum;
+import com.github.enums.ResultEnum;
 import lombok.Data;
 
 /**

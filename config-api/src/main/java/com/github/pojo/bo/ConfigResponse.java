@@ -1,6 +1,6 @@
-package com.github.common.pojo.bo;
+package com.github.pojo.bo;
 
-import com.github.common.enums.ConfigType;
+import com.github.enums.ConfigType;
 import lombok.Data;
 
 /**

@@ -1,4 +1,4 @@
-package com.github.common.enums;
+package com.github.enums;
 
 /**
  * @author hangs.zhang

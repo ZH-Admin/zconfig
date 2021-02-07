@@ -4,7 +4,7 @@ import com.github.client.annotation.HConfig;
 import com.github.client.model.ConfigData;
 import com.github.client.spring.load.HotConfigOnFieldProcessor;
 import com.github.client.utils.ReflectionUtils;
-import com.github.common.exception.ConfigBaseException;
+import com.github.exception.ConfigBaseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;

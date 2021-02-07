@@ -1,8 +1,8 @@
 package com.github.client.spring.load;
 
 import com.github.client.utils.Constant;
-import com.github.common.enums.ResultEnum;
-import com.github.common.exception.ConfigBaseException;
+import com.github.enums.ResultEnum;
+import com.github.exception.ConfigBaseException;
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Component;

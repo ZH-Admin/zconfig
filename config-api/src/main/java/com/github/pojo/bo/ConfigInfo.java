@@ -1,4 +1,4 @@
-package com.github.common.pojo.bo;
+package com.github.pojo.bo;
 
 import lombok.Data;
 

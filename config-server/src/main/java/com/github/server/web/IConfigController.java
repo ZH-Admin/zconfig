@@ -1,8 +1,8 @@
 package com.github.server.web;
 
-import com.github.common.pojo.bo.ConfigRequest;
-import com.github.common.pojo.bo.ConfigResponse;
-import com.github.common.rpc.ConfigClient;
+import com.github.pojo.bo.ConfigRequest;
+import com.github.pojo.bo.ConfigResponse;
+import com.github.rpc.ConfigClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

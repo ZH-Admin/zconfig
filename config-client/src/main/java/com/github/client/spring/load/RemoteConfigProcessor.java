@@ -1,9 +1,9 @@
 package com.github.client.spring.load;
 
 import com.github.client.utils.AppConfig;
-import com.github.common.pojo.bo.ConfigRequest;
-import com.github.common.pojo.bo.ConfigResponse;
-import com.github.common.rpc.ConfigClient;
+import com.github.pojo.bo.ConfigRequest;
+import com.github.pojo.bo.ConfigResponse;
+import com.github.rpc.ConfigClient;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

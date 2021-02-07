@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
  * 2. 后者为项目
  */
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.github.client", "com.github.demo"})
+@ComponentScan(basePackages = {"com.github", "com.github.demo"})
 public class DemoApplication {
 
     public static void main(String[] args) {

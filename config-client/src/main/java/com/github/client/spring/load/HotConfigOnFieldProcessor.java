@@ -2,10 +2,10 @@ package com.github.client.spring.load;
 
 import com.github.client.annotation.HConfig;
 import com.github.client.model.ConfigData;
-import com.github.common.enums.ConfigType;
-import com.github.common.exception.ConfigBaseException;
-import com.github.common.pojo.bo.ConfigResponse;
-import com.github.common.utils.JsonUtils;
+import com.github.enums.ConfigType;
+import com.github.exception.ConfigBaseException;
+import com.github.pojo.bo.ConfigResponse;
+import com.github.utils.JsonUtils;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Table;

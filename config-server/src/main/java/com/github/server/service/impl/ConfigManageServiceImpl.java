@@ -1,7 +1,7 @@
 package com.github.server.service.impl;
 
-import com.github.common.pojo.bo.ConfigInfo;
-import com.github.common.enums.ResultEnum;
+import com.github.pojo.bo.ConfigInfo;
+import com.github.enums.ResultEnum;
 import com.github.server.exceptions.ConfigServerException;
 import com.github.server.exceptions.utils.Verify;
 import com.github.server.service.ConfigManageService;

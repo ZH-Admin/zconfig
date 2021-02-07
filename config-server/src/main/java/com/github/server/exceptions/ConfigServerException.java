@@ -1,7 +1,7 @@
 package com.github.server.exceptions;
 
-import com.github.common.enums.ResultEnum;
-import com.github.common.exception.ConfigBaseException;
+import com.github.enums.ResultEnum;
+import com.github.exception.ConfigBaseException;
 import lombok.Getter;
 
 /**

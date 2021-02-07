@@ -1,7 +1,7 @@
-package com.github.common.rpc;
+package com.github.rpc;
 
-import com.github.common.pojo.bo.ConfigRequest;
-import com.github.common.pojo.bo.ConfigResponse;
+import com.github.pojo.bo.ConfigRequest;
+import com.github.pojo.bo.ConfigResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
