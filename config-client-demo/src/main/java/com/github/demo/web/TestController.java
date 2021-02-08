@@ -1,7 +1,5 @@
 package com.github.demo.web;
 
-import com.github.client.model.bo.ConfigRequest;
-import com.github.client.rpc.ConfigClient;
 import com.github.demo.service.HelloService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,21 +23,12 @@ public class TestController {
     @Autowired
     private HelloService helloService;
 
-    @Autowired
-    private ConfigClient configClient;
-
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     @GetMapping("/hello")
     public String sayHello() {
         helloService.printMap();
         return "hello world";
-    }
-
-    @GetMapping("/ping")
-    public String ping() {
-        LOGGER.info("result {}", configClient.checkUpdate(new ConfigRequest()));
-        return "ok";
     }
 
 }

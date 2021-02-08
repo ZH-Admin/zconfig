@@ -11,7 +11,7 @@ public final class Constant {
     private Constant() {
     }
 
-    public static final String BASE_DIR = "/tmp/config/" + AppConfig.getName();
+    public static final String BASE_DIR = "~/tmp/config/" + AppConfig.getName();
 
     public static final String CONFIG_PATH = BASE_DIR + "/%s";
 

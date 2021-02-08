@@ -14,7 +14,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Documented
-@ComponentScan(basePackages = "com.github")
+@ComponentScan(basePackages = "com.github.client")
 @EnableFeignClients(basePackages = "com.github.client.rpc")
-public @interface EnableHConfig {
+public @interface EnableHotConfig {
 }

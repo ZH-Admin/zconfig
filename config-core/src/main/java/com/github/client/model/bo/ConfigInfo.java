@@ -11,8 +11,8 @@ import lombok.Data;
 @Data
 public class ConfigInfo {
 
-    private String appName;
+    protected String appName;
 
-    private Integer version;
+    protected Integer version;
 
 }

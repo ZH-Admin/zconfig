@@ -1,11 +1,9 @@
 package com.github.client.spring.load;
 
-import com.github.client.annotation.HConfig;
+import com.github.client.annotation.HotConfig;
 import com.github.client.model.ConfigData;
-import com.github.client.enums.ConfigType;
-import com.github.client.exception.ConfigBaseException;
 import com.github.client.model.bo.ConfigResponse;
-import com.github.client.utils.JsonUtils;
+import com.github.client.utils.ReflectionUtils;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Table;
@@ -19,7 +17,6 @@ import javax.annotation.Resource;
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Field;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -30,10 +27,10 @@ import java.util.concurrent.ConcurrentHashMap;
  * function:
  */
 @Service
-public class HotConfigOnFieldProcessor {
+public class HotConfigOnFieldLoader {
 
     @Resource
-    private RemoteConfigProcessor remoteConfigProcessor;
+    private RemoteConfigLoader remoteConfigProcessor;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
@@ -69,26 +66,18 @@ public class HotConfigOnFieldProcessor {
     }
 
     public void putConfig2Field(Object bean, Field field) {
-        String dataId = field.getAnnotation(HConfig.class).value();
+        String dataId = field.getAnnotation(HotConfig.class).value();
         ConfigData config = getConfig(dataId);
-        field.setAccessible(true);
-        try {
-            field.set(bean, JsonUtils.fromJson(config.getContent(), Map.class));
-            TABLES.put(bean, field, config);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        ReflectionUtils.setFieldContent(bean, field, config.getContent());
+        TABLES.put(bean, field, config);
     }
 
     public ConfigData getConfig(String dataId) {
         LOGGER.info("dataId {} getConfig", dataId);
         ConfigResponse configResponse = remoteConfigProcessor.getConfig(dataId);
-        if (Objects.equals(configResponse.getConfigType(), ConfigType.PROPERTIES)) {
-            ConfigData configData = new ConfigData();
-            BeanUtils.copyProperties(configResponse, configData);
-            return configData;
-        }
-        throw new ConfigBaseException("类型错误");
+        ConfigData configData = new ConfigData();
+        BeanUtils.copyProperties(configResponse, configData);
+        return configData;
     }
 
     public void processAll() {
@@ -105,7 +94,7 @@ public class HotConfigOnFieldProcessor {
     }
 
     public static String getDataId(Field field) {
-        return field.getAnnotation(HConfig.class).value();
+        return field.getAnnotation(HotConfig.class).value();
     }
 
 }

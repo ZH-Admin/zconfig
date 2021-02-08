@@ -15,7 +15,7 @@ import javax.annotation.Resource;
  * function:
  */
 @Component
-public class RemoteConfigProcessor {
+public class RemoteConfigLoader {
 
     @Resource
     private ConfigClient configClient;
@@ -25,8 +25,18 @@ public class RemoteConfigProcessor {
         return false;
     }
 
+    /**
+     * 获取最新配置
+     */
     public ConfigResponse getConfig(String dataId) {
         return configClient.getConfig(generateConfigRequest(dataId, null));
+    }
+
+    /**
+     * 获取指定版本的配置
+     */
+    public ConfigResponse getConfig(String dataId, Integer version) {
+        return configClient.getConfig(generateConfigRequest(dataId, version));
     }
 
     private ConfigRequest generateConfigRequest(String dataId, Integer version) {

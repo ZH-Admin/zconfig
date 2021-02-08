@@ -4,6 +4,7 @@ import com.github.client.model.bo.ConfigRequest;
 import com.github.client.model.bo.ConfigResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * @author hangs.zhang
@@ -15,9 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface ConfigClient {
 
     @PostMapping("/config")
-    ConfigResponse getConfig(ConfigRequest configRequest);
+    ConfigResponse getConfig(@RequestBody ConfigRequest configRequest);
 
     @PostMapping("/checkUpdate")
-    ConfigResponse checkUpdate(ConfigRequest configRequest);
+    ConfigResponse checkUpdate(@RequestBody ConfigRequest configRequest);
 
 }

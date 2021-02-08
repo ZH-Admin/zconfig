@@ -25,7 +25,7 @@
     <modules>
         <module>config-core</module>
         <module>config-server</module>
-        <module>config-demo</module>
+        <module>config-client-demo</module>
     </modules>
 
     <dependencyManagement>
