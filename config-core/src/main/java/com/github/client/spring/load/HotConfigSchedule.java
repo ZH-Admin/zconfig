@@ -2,6 +2,7 @@ package com.github.client.spring.load;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -14,6 +15,7 @@ import java.util.concurrent.*;
  * *****************
  * function:
  */
+@Component
 public class HotConfigSchedule {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
@@ -26,10 +28,14 @@ public class HotConfigSchedule {
     @PostConstruct
     public void init() {
         LOGGER.info("config schedule init");
-        scheduledExecutorService.schedule(() -> {
-            LOGGER.info("request new config");
-            configProcessor.processAll();
-        }, 60, TimeUnit.MILLISECONDS);
+        scheduledExecutorService.scheduleAtFixedRate(() -> {
+            try {
+                LOGGER.info("request new config");
+                configProcessor.processAll();
+            } catch (Exception e) {
+                LOGGER.error("request new config error", e);
+            }
+        }, 60, 10, TimeUnit.SECONDS);
     }
 
 }

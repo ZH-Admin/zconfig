@@ -27,7 +27,7 @@ public final class JsonUtils {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    private static final String JSON_ERROR_FORMAT = "Json 解析异常,Json:{}";
+    private static final String JSON_ERROR_FORMAT = "Json解析异常, Json:{}";
 
     private static final String JSON_ERROR_MESSAGE = "Json解析异常";
 
