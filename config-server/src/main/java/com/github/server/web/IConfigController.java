@@ -1,9 +1,9 @@
 package com.github.server.web;
 
-import com.github.pojo.bo.ConfigRequest;
-import com.github.pojo.bo.ConfigResponse;
-import com.github.rpc.ConfigClient;
-import org.springframework.web.bind.annotation.GetMapping;
+import com.github.client.model.bo.ConfigRequest;
+import com.github.client.model.bo.ConfigResponse;
+import com.github.client.rpc.ConfigClient;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -16,15 +16,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class IConfigController implements ConfigClient {
 
     @Override
-    @GetMapping("/config")
+    @PostMapping("/config")
     public ConfigResponse getConfig(ConfigRequest configRequest) {
         return null;
     }
 
     @Override
-    @GetMapping("/checkUpdate")
-    public boolean checkUpdate(ConfigRequest configRequest) {
-        return false;
+    @PostMapping("/checkUpdate")
+    public ConfigResponse checkUpdate(ConfigRequest configRequest) {
+        ConfigResponse configResponse = new ConfigResponse();
+        configResponse.setVersion(9);
+        return configResponse;
     }
 
 }

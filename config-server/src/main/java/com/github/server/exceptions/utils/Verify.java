@@ -1,6 +1,6 @@
 package com.github.server.exceptions.utils;
 
-import com.github.enums.ResultEnum;
+import com.github.client.enums.ResultEnum;
 import com.github.server.exceptions.ConfigServerException;
 import org.apache.commons.lang3.StringUtils;
 

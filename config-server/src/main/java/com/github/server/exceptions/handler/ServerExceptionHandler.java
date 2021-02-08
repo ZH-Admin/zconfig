@@ -1,7 +1,7 @@
 package com.github.server.exceptions.handler;
 
-import com.github.pojo.BaseResult;
-import com.github.enums.ResultEnum;
+import com.github.client.enums.ResultEnum;
+import com.github.client.model.BaseResult;
 import com.github.server.exceptions.ConfigServerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

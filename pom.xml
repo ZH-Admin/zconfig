@@ -23,10 +23,8 @@
     </properties>
 
     <modules>
-        <module>config-api</module>
-        <module>config-client</module>
+        <module>config-core</module>
         <module>config-server</module>
-        <module>config-admin</module>
         <module>config-demo</module>
     </modules>
 
