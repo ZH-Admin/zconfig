@@ -5,11 +5,13 @@
 <mapper namespace="com.github.server.dao.PropertiesDAO">
 
     <sql id="tAllColumn">
-        t1.id, t1.app_name, t1.properties_name, t1.properties_description, t1.content, t1.version
+        t1.id, t1.app_name, t1.data_id, t1.description, t1.content, t1.state, t1.app_version, t1.data_version
+        , t1.environment, t1.create_time, t1.update_time
     </sql>
 
     <sql id="allColumn">
-        id, app_name, properties_name, properties_description, content, version
+        id, app_name, data_id, description, content, state, app_version, data_version
+        , environment, create_time, update_time
     </sql>
 
     <!-- group分组之后, 一个组中会有好几条数据, 但是一般默认返回id最小的那一条, 现在想返回version最大的那一条数据 -->
@@ -19,9 +21,9 @@
         from
             (select <include refid="allColumn"/> from properties) as t1
         join
-            (select app_name, properties_name, max(version) as version from properties group by app_name, properties_name) as t2
+            (select app_name, data_id, max(data_version) as version from properties group by app_name, data_id) as t2
         on
-            t1.app_name = t2.app_name and t1.properties_name = t2.properties_name and t1.version = t2.version;
+            t1.app_name = t2.app_name and t1.data_id = t2.data_id and t1.data_version = t2.version;
     </select>
 
     <select id="selectLastVersionPropertiesByAppName" resultType="com.github.server.entity.po.PropertiesPO">
@@ -30,11 +32,15 @@
         from
             (select <include refid="allColumn"/> from properties) as t1
         join
-            (select app_name, properties_name, max(version) as version from properties group by app_name, properties_name) as t2
+            (select app_name, data_id, max(data_version) as version from properties group by app_name, data_id) as t2
         on
-            t1.app_name = t2.app_name and t1.properties_name = t2.properties_name and t1.version = t2.version
+            t1.app_name = t2.app_name and t1.data_id = t2.data_id and t1.data_version = t2.version
         where
             t1.app_name = #{appName}
+    </select>
+
+    <select id="selectMaxAppVersion" resultType="java.lang.Integer">
+        select max(app_version) from properties where app_name = #{appName}
     </select>
 
 </mapper>

@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 
 import java.lang.invoke.MethodHandles;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author hangs.zhang
@@ -36,8 +37,16 @@ public class PropertiesDAOTest {
 
     @Test
     public void selectLastVersionPropertiesByAppName() {
-        List<PropertiesPO> properties = propertiesDAO.selectLastVersionPropertiesByAppName("demo");
-        LOGGER.info("data:{}", properties);
+        Map<String, PropertiesPO> map = propertiesDAO.selectLastVersionPropertiesByAppName("client-demo");
+        map.forEach((k, v) -> {
+            LOGGER.info("key:{}, value:{}", k, v);
+        });
+    }
+
+    @Test
+    public void selectMaxAppVersion() {
+        Integer appVersion = propertiesDAO.selectMaxAppVersion("client-demo");
+        LOGGER.info("version:{}", appVersion);
     }
 
 }

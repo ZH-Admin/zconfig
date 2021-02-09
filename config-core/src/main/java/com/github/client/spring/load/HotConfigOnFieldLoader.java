@@ -1,19 +1,18 @@
 package com.github.client.spring.load;
 
 import com.github.client.annotation.HotConfig;
-import com.github.client.model.ConfigData;
-import com.github.client.model.bo.ConfigResponse;
+import com.github.client.model.ConfigInfo;
+import com.github.client.utils.ConfigServerHttpClient;
 import com.github.client.utils.ReflectionUtils;
 import com.google.common.collect.Maps;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
-import javax.annotation.Resource;
-import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Field;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
+import java.util.stream.Collectors;
 
 /**
  * @author hangs.zhang
@@ -24,30 +23,24 @@ import java.util.concurrent.ConcurrentMap;
 @Service
 public class HotConfigOnFieldLoader {
 
-    @Resource
-    private RemoteConfigLoader remoteConfigProcessor;
+    private static final ConcurrentMap<Object, Field> FIELD_MAP = Maps.newConcurrentMap();
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-
-    private static final ConcurrentMap<Object, Field> CONFIGS = Maps.newConcurrentMap();
-
-    public void putConfig2Field(Object bean, Field field) {
-        String dataId = field.getAnnotation(HotConfig.class).value();
-        ConfigData config = getConfig(dataId);
-        ReflectionUtils.setFieldContent(bean, field, config.getContent());
-        CONFIGS.put(bean, field);
-    }
-
-    public ConfigData getConfig(String dataId) {
-        LOGGER.info("dataId {} getConfig", dataId);
-        ConfigResponse configResponse = remoteConfigProcessor.getConfig(dataId);
-        ConfigData configData = new ConfigData();
-        BeanUtils.copyProperties(configResponse, configData);
-        return configData;
+    public void storeField(Object bean, Field field) {
+        FIELD_MAP.put(bean, field);
     }
 
     public void processAll() {
-        CONFIGS.forEach(this::putConfig2Field);
+        List<ConfigInfo> config = ConfigServerHttpClient.getConfig();
+        if (!CollectionUtils.isEmpty(config)) {
+            Map<String, ConfigInfo> configMap = config.stream().collect(Collectors.toMap(ConfigInfo::getDataId, configInfo -> configInfo));
+            FIELD_MAP.forEach((bean, field) -> {
+                ConfigInfo configInfo = configMap.get(field.getAnnotation(HotConfig.class).value());
+                if (configInfo != null) {
+                    ReflectionUtils.setFieldContent(bean, field, configInfo.getContent());
+                }
+            });
+
+        }
     }
 
 }

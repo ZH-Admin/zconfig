@@ -1,24 +1,29 @@
 package com.github.client.spring;
 
 import com.github.client.annotation.HotConfig;
-import com.github.client.model.ConfigData;
+import com.github.client.model.ConfigInfo;
 import com.github.client.spring.load.HotConfigOnFieldLoader;
-import com.github.client.utils.ReflectionUtils;
+import com.github.client.utils.ConfigServerHttpClient;
 import com.github.client.exception.ConfigBaseException;
+import com.github.client.utils.ReflectionUtils;
+import com.google.common.collect.Maps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Resource;
+import javax.annotation.PostConstruct;
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 /**
  * @author hangs.zhang
@@ -31,42 +36,52 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class HotConfigBeanPostProcessor implements BeanPostProcessor {
 
-    @Resource
-    private HotConfigOnFieldLoader hotConfigProcessor;
+    @Autowired
+    private HotConfigOnFieldLoader fieldLoader;
+
+    private static final Map<String, ConfigInfo> DATA_MAP = new HashMap<>();
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
+    @PostConstruct
+    public void init() {
+        List<ConfigInfo> config = ConfigServerHttpClient.getConfig();
+        Map<String, ConfigInfo> collect = config.stream().collect(Collectors.toMap(ConfigInfo::getDataId, configInfo -> configInfo));
+        DATA_MAP.putAll(collect);
+    }
+
     @Override
-    public Object postProcessBeforeInitialization(@Nonnull Object bean, @Nonnull String beanName) throws BeansException {
+    public Object postProcessBeforeInitialization(@Nonnull Object bean, @Nonnull String beanName) {
         List<Field> fields = ReflectionUtils.getFieldsWithAnnotation(bean, HotConfig.class);
         for (Field field : fields) {
             HotConfig hConfig = field.getAnnotation(HotConfig.class);
             LOGGER.debug("HConfig value : {}", hConfig.value());
             // 初始化data
-            ReflectionUtils.setFieldContent(bean, field, new ConcurrentHashMap<>(16));
+            ReflectionUtils.setFieldContent(bean, field, Maps.newConcurrentMap());
             // 获取对象
-            Object obj = ReflectionUtils.getFieldContent(bean, field);
-            if (obj instanceof Map) {
+            Object fieldValue = ReflectionUtils.getFieldContent(bean, field);
+            if (fieldValue instanceof Map) {
                 // 线程安全
                 @SuppressWarnings("unchecked")
-                Map<String, String> data = (ConcurrentHashMap<String, String>) obj;
+                Map<String, String> data = (ConcurrentHashMap<String, String>) fieldValue;
                 // 完成远程配置的读取
-                ConfigData config = hotConfigProcessor.getConfig(hConfig.value());
-                if (!Objects.isNull(config)) {
-                    Map<String, String> content = config.getContent();
+                ConfigInfo configInfo = DATA_MAP.get(hConfig.value());
+                if (!Objects.isNull(configInfo)) {
+                    Map<String, String> content = configInfo.getContent();
                     if (!Objects.isNull(content)) {
                         data.putAll(content);
                     }
                 }
+                fieldLoader.storeField(bean, field);
             } else {
-                throw new ConfigBaseException("not suppoert this type : " + obj.getClass());
+                throw new ConfigBaseException("not suppoert this type : " + fieldValue.getClass());
             }
         }
         return bean;
     }
 
     @Override
-    public Object postProcessAfterInitialization(@Nonnull Object bean, @Nonnull String beanName) throws BeansException {
+    public Object postProcessAfterInitialization(@Nonnull Object bean, @Nonnull String beanName) {
         return bean;
     }
 

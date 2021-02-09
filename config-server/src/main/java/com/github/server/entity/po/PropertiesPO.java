@@ -17,13 +17,11 @@ public class PropertiesPO {
 
     private String appName;
 
-    private Integer propertiesId;
-
-    private String propertiesName;
+    private String dataId;
 
     private String content;
 
-    private String propertiesDescription;
+    private String description;
 
     /**
      * 0 已修改,未审核
@@ -32,7 +30,9 @@ public class PropertiesPO {
      */
     private Integer state;
 
-    private Integer version;
+    private Integer appVersion;
+
+    private Integer dataVersion;
 
     private String environment;
 

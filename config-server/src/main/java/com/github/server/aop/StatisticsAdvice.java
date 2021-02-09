@@ -2,7 +2,7 @@ package com.github.server.aop;
 
 import com.github.client.utils.JsonUtils;
 import com.google.common.collect.Maps;
-import com.github.server.annotation.StatisticsTime;
+import com.github.server.aop.annotation.StatisticsTime;
 import com.google.common.base.Stopwatch;
 import com.github.server.constant.ApplicationConstant;
 import org.aspectj.lang.ProceedingJoinPoint;

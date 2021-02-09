@@ -1,8 +1,6 @@
 # hot-config
 
 ## 技术栈选择
-### RPC
-Feign
 ### Framework
 SpringBoot
 ### ORM

@@ -1,5 +1,6 @@
 package com.github.client.spring.load;
 
+import com.github.client.utils.ConfigServerHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -23,19 +24,25 @@ public class HotConfigSchedule {
     ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
 
     @Resource
-    private HotConfigOnFieldLoader configProcessor;
+    private HotConfigOnFieldLoader fieldLoader;
 
     @PostConstruct
     public void init() {
         LOGGER.info("config schedule init");
-        scheduledExecutorService.scheduleAtFixedRate(() -> {
-            try {
-                LOGGER.info("request new config");
-                configProcessor.processAll();
-            } catch (Exception e) {
-                LOGGER.error("request new config error", e);
+        scheduledExecutorService.schedule(() -> {
+            while (true) {
+                try {
+                    // long pull, 长轮询
+                    LOGGER.info("start pull");
+                    if (ConfigServerHttpClient.checkConfigUpdate()) {
+                        fieldLoader.processAll();
+                    }
+                    LOGGER.info("end pull");
+                } catch (Exception e) {
+                    LOGGER.error("long pull error", e);
+                }
             }
-        }, 60, 10, TimeUnit.SECONDS);
+        }, 60, TimeUnit.SECONDS);
     }
 
 }

@@ -1,6 +1,6 @@
 package com.github.client.annotation;
 
-import org.springframework.cloud.openfeign.EnableFeignClients;
+
 import org.springframework.context.annotation.ComponentScan;
 
 import java.lang.annotation.*;
@@ -15,6 +15,5 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Documented
 @ComponentScan(basePackages = "com.github.client")
-@EnableFeignClients(basePackages = "com.github.client.rpc")
 public @interface EnableHotConfig {
 }

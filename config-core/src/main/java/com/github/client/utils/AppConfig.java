@@ -22,12 +22,15 @@ public final class AppConfig {
 
     private static final String TOKEN;
 
+    private static final String CONFIG_SERVER_URL;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     static {
         Properties property = getProperty("application.properties");
-        NAME = property.getProperty("my-app.name");
-        TOKEN = property.getProperty("my-app.token");
+        NAME = property.getProperty("app.name");
+        TOKEN = property.getProperty("app.token");
+        CONFIG_SERVER_URL = property.getProperty("app.config-server-url");
     }
 
     private AppConfig() {
@@ -39,6 +42,10 @@ public final class AppConfig {
 
     public static String getToken() {
         return TOKEN;
+    }
+
+    public static String getConfigServerUrl() {
+        return CONFIG_SERVER_URL;
     }
 
     private static Properties getProperty(String propertyFileName) {

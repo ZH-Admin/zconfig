@@ -1,4 +1,4 @@
-package com.github.server.annotation;
+package com.github.server.aop.annotation;
 
 import java.lang.annotation.*;
 
