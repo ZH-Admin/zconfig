@@ -13,11 +13,9 @@
     <packaging>pom</packaging>
 
     <name>hot-config</name>
-    <description>The Hot Config</description>
 
     <properties>
         <java.version>1.8</java.version>
-        <spring-cloud.version>Hoxton.SR6</spring-cloud.version>
         <com.fasterxml.jackson.version>2.10.1</com.fasterxml.jackson.version>
         <skipTests>true</skipTests>
     </properties>
@@ -27,18 +25,6 @@
         <module>config-server</module>
         <module>config-client-demo</module>
     </modules>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <dependencies>
         <!-- 日志 -->
@@ -70,6 +56,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.16.22</version>
             <optional>true</optional>
         </dependency>
     </dependencies>
