@@ -1,6 +1,5 @@
 package com.github.client.model;
 
-import com.github.client.enums.ConfigType;
 import lombok.Data;
 
 import java.util.Map;
@@ -19,8 +18,6 @@ public class ConfigInfo {
     private String dataId;
 
     private Map<String, String> content;
-
-    private ConfigType configType;
 
     private Integer dataVersion;
 

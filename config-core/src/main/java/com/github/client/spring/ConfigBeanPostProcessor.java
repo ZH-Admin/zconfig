@@ -2,7 +2,6 @@ package com.github.client.spring;
 
 import com.github.client.annotation.HotConfig;
 import com.github.client.model.ConfigInfo;
-import com.github.client.spring.load.HotConfigOnFieldLoader;
 import com.github.client.utils.ConfigServerHttpClient;
 import com.github.client.exception.ConfigBaseException;
 import com.github.client.utils.ReflectionUtils;
@@ -11,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Nonnull;
@@ -34,10 +32,10 @@ import java.util.stream.Collectors;
  * HotConfigBeanPostProcessor: 在客户端初始化bean过程中，生成配置（从hotConfigManager中获取）
  */
 @Component
-public class HotConfigBeanPostProcessor implements BeanPostProcessor {
+public class ConfigBeanPostProcessor implements BeanPostProcessor {
 
     @Autowired
-    private HotConfigOnFieldLoader fieldLoader;
+    private FieldLoader fieldLoader;
 
     private static final Map<String, ConfigInfo> DATA_MAP = new HashMap<>();
 

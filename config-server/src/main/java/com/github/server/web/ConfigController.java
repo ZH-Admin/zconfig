@@ -1,7 +1,6 @@
 package com.github.server.web;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.github.client.enums.ConfigType;
 import com.github.client.model.BaseResult;
 import com.github.client.model.ConfigInfo;
 import com.github.client.utils.JsonUtils;
@@ -99,7 +98,6 @@ public class ConfigController {
         BeanUtils.copyProperties(propertiesPO, configInfo);
         configInfo.setContent(JsonUtils.fromJson(propertiesPO.getContent(), new TypeReference<Map<String, String>>() {
         }));
-        configInfo.setConfigType(ConfigType.PROPERTIES);
         return configInfo;
     }
 

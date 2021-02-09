@@ -17,7 +17,7 @@ import java.util.List;
  * *********************
  * function: 反射工具类
  */
-public class ReflectionUtils {
+public final class ReflectionUtils {
 
     private ReflectionUtils() {
     }
