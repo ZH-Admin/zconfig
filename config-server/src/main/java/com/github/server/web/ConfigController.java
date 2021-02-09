@@ -62,13 +62,6 @@ public class ConfigController {
         return configs.stream().map(this::convert2ConfigResponse).collect(Collectors.toList());
     }
 
-    @GetMapping("/config/{appName}/{dataId}")
-    public ConfigInfo getConfig(@PathVariable("appName") String appName, @PathVariable("dataId") String dataId) {
-        PropertiesPO propertiesPO = configService.getConfig(appName, dataId);
-        if (propertiesPO == null) return null;
-        return convert2ConfigResponse(propertiesPO);
-    }
-
     @GetMapping("/checkConfig/{appName}")
     public DeferredResult<String> checkConfigUpdate(@PathVariable("appName") String appName) {
         DeferredResult<String> result = new DeferredResult<>();

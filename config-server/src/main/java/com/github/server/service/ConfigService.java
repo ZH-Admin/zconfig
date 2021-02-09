@@ -4,7 +4,6 @@ import com.github.client.enums.ResultEnum;
 import com.github.server.dao.PropertiesDAO;
 import com.github.server.entity.po.PropertiesPO;
 import com.github.server.exceptions.ConfigServerException;
-import com.github.client.utils.KeyUtils;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +28,6 @@ public class ConfigService {
     @Autowired
     private PropertiesDAO propertiesDAO;
 
-    /**
-     * key为appName+dataId
-     */
-    private static final Map<String, PropertiesPO> APP_DATA_CONFIG = Maps.newConcurrentMap();
-
     private static final Map<String, List<PropertiesPO>> APP_CONFIG = Maps.newConcurrentMap();
 
     /**
@@ -52,7 +46,6 @@ public class ConfigService {
         if (!Objects.isNull(propertiesPOS)) {
             propertiesPOS.forEach(propertiesPO -> {
                 String appName = propertiesPO.getAppName();
-                APP_DATA_CONFIG.put(KeyUtils.getKey(appName, propertiesPO.getDataId()), propertiesPO);
 
                 List<PropertiesPO> propertiesPOList = APP_CONFIG.get(appName);
                 if (CollectionUtils.isEmpty(propertiesPOList)) {
@@ -66,13 +59,6 @@ public class ConfigService {
                 }
             });
         }
-    }
-
-    public PropertiesPO getConfig(String appName, String dataId) {
-        if (StringUtils.isBlank(dataId) || StringUtils.isBlank(appName)) {
-            throw new ConfigServerException(ResultEnum.PARAM_ERROR);
-        }
-        return APP_DATA_CONFIG.get(KeyUtils.getKey(appName, dataId));
     }
 
     public List<PropertiesPO> getConfig(String appName) {
