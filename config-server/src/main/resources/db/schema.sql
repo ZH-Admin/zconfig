@@ -25,6 +25,7 @@ CREATE TABLE config_server_discovery
 (
     hostname          VARCHAR(128) NOT NULL COMMENT '主机名称',
     ip                VARCHAR(15)  NOT NULL COMMENT 'ip地址',
+    port              INT          NOT NULL COMMENT '端口号',
     last_renew_time   DATETIME     NOT NULL COMMENT '上一次续约时间',
     renew_time_period BIGINT(11)   NOT NULL COMMENT '续约的时间周期 单位ms'
 ) ENGINE = InnoDB
